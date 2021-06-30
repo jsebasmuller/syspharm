@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_Farmacia.Models
+namespace SysPharm.Models
 {
-  public class TipoDocumento
+  public class Eps
   {
     [Key]
     public int Id { get; set; }
-    [StringLength(50)]
+    [StringLength(100)]
     public string Nombre { get; set; }
   }
 }

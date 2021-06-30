@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Proyecto_Farmacia.Properties
+namespace SysPharm.Properties
 {
 
 

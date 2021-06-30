@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Proyecto_Farmacia
+namespace SysPharm
 {
   static class Program
   {
@@ -16,7 +16,9 @@ namespace Proyecto_Farmacia
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new Form1());
+      Form1 main = new Form1();
+      main.StartPosition = FormStartPosition.CenterScreen;
+      Application.Run(main);
     }
   }
 }

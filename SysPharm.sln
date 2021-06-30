@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_Farmacia", "Proyecto_Farmacia\Proyecto_Farmacia.csproj", "{11CADFB6-CE11-447D-AFC3-C8F1A9B0C401}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysPharm", "SysPharm\SysPharm.csproj", "{11CADFB6-CE11-447D-AFC3-C8F1A9B0C401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9141BD0C-F162-48AA-9436-A7DF12064D8E}
+		SolutionGuid = {6B973056-8440-41A3-B1AD-783D5A6DD818}
 	EndGlobalSection
 EndGlobal

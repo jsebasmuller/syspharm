@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Proyecto_Farmacia.Properties
+namespace SysPharm.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace Proyecto_Farmacia.Properties
       {
         if ((resourceMan == null))
         {
-          global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Proyecto_Farmacia.Properties.Resources", typeof(Resources).Assembly);
+          global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SysPharm.Properties.Resources", typeof(Resources).Assembly);
           resourceMan = temp;
         }
         return resourceMan;

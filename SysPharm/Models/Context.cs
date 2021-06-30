@@ -1,4 +1,4 @@
-namespace Proyecto_Farmacia.Models
+namespace SysPharm.Models
 {
   using System;
   using System.Data.Entity;
@@ -19,6 +19,7 @@ namespace Proyecto_Farmacia.Models
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<Servicio> Servicios { get; set; }
     public DbSet<TipoDocumento> TiposDocumento { get; set; }
+    public DbSet<Ingreso> Ingresos { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {

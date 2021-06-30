@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_Farmacia.Models
+namespace SysPharm.Models
 {
   public class Usuario
   {
@@ -20,6 +20,8 @@ namespace Proyecto_Farmacia.Models
     public string Direccion { get; set; }
     [StringLength(10)]
     public string Telefono { get; set; }
+    [StringLength(50)]
+    public string TipoUsuario { get; set; }
 
 
     #region Propiedades de Navegación

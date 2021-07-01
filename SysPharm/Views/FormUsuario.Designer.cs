@@ -50,9 +50,14 @@
       this.label6 = new System.Windows.Forms.Label();
       this.label4 = new System.Windows.Forms.Label();
       this.txtDireccion = new System.Windows.Forms.TextBox();
+      this.tabBulkLoad = new System.Windows.Forms.TabPage();
+      this.btnDown = new System.Windows.Forms.Button();
+      this.btnLoad = new System.Windows.Forms.Button();
       this.tabListUsers = new System.Windows.Forms.TabPage();
+      this.label7 = new System.Windows.Forms.Label();
       this.listUsuarios = new System.Windows.Forms.DataGridView();
       this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.label8 = new System.Windows.Forms.Label();
       this.listMedicos = new System.Windows.Forms.DataGridView();
       this.errTDoc = new System.Windows.Forms.ErrorProvider(this.components);
       this.errDoc = new System.Windows.Forms.ErrorProvider(this.components);
@@ -62,12 +67,10 @@
       this.errTel = new System.Windows.Forms.ErrorProvider(this.components);
       this.openFile = new System.Windows.Forms.OpenFileDialog();
       this.saveFile = new System.Windows.Forms.SaveFileDialog();
-      this.btnLoad = new System.Windows.Forms.Button();
-      this.btnDown = new System.Windows.Forms.Button();
-      this.tabBulkLoad = new System.Windows.Forms.TabPage();
       this.tabUser.SuspendLayout();
       this.tabAddUser.SuspendLayout();
       this.groupBox1.SuspendLayout();
+      this.tabBulkLoad.SuspendLayout();
       this.tabListUsers.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listUsuarios)).BeginInit();
       this.tabPage1.SuspendLayout();
@@ -78,7 +81,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.errDir)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTUsu)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTel)).BeginInit();
-      this.tabBulkLoad.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabUser
@@ -310,8 +312,49 @@
       this.txtDireccion.TabIndex = 7;
       this.txtDireccion.Leave += new System.EventHandler(this.ValidarDireccion);
       // 
+      // tabBulkLoad
+      // 
+      this.tabBulkLoad.Controls.Add(this.btnDown);
+      this.tabBulkLoad.Controls.Add(this.btnLoad);
+      this.tabBulkLoad.Location = new System.Drawing.Point(4, 27);
+      this.tabBulkLoad.Name = "tabBulkLoad";
+      this.tabBulkLoad.Padding = new System.Windows.Forms.Padding(3);
+      this.tabBulkLoad.Size = new System.Drawing.Size(792, 419);
+      this.tabBulkLoad.TabIndex = 1;
+      this.tabBulkLoad.Text = "Cargue Masivo";
+      this.tabBulkLoad.UseVisualStyleBackColor = true;
+      // 
+      // btnDown
+      // 
+      this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
+      this.btnDown.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnDown.Location = new System.Drawing.Point(180, 166);
+      this.btnDown.Name = "btnDown";
+      this.btnDown.Size = new System.Drawing.Size(166, 36);
+      this.btnDown.TabIndex = 2;
+      this.btnDown.Text = "Descargar Plantilla";
+      this.btnDown.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnDown.UseVisualStyleBackColor = true;
+      this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+      // 
+      // btnLoad
+      // 
+      this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
+      this.btnLoad.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnLoad.Location = new System.Drawing.Point(453, 166);
+      this.btnLoad.Name = "btnLoad";
+      this.btnLoad.Size = new System.Drawing.Size(166, 36);
+      this.btnLoad.TabIndex = 1;
+      this.btnLoad.Text = "Cargar Datos";
+      this.btnLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnLoad.UseVisualStyleBackColor = true;
+      this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+      // 
       // tabListUsers
       // 
+      this.tabListUsers.Controls.Add(this.label7);
       this.tabListUsers.Controls.Add(this.listUsuarios);
       this.tabListUsers.Location = new System.Drawing.Point(4, 27);
       this.tabListUsers.Name = "tabListUsers";
@@ -321,21 +364,36 @@
       this.tabListUsers.Text = "Lista de Pacientes";
       this.tabListUsers.UseVisualStyleBackColor = true;
       // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.BackColor = System.Drawing.Color.SkyBlue;
+      this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+      this.label7.Location = new System.Drawing.Point(3, 3);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(719, 18);
+      this.label7.TabIndex = 1;
+      this.label7.Text = "Sí desea modificar o eliminar un usuario, debes dar doble clic sobre el usuario a" +
+    "l que deseas hacer la acción";
+      // 
       // listUsuarios
       // 
+      this.listUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.listUsuarios.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.listUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
       this.listUsuarios.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listUsuarios.Location = new System.Drawing.Point(3, 3);
+      this.listUsuarios.Location = new System.Drawing.Point(3, 24);
       this.listUsuarios.Name = "listUsuarios";
-      this.listUsuarios.Size = new System.Drawing.Size(786, 413);
+      this.listUsuarios.Size = new System.Drawing.Size(786, 392);
       this.listUsuarios.TabIndex = 0;
       this.listUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
       // tabPage1
       // 
       this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage1.Controls.Add(this.label8);
       this.tabPage1.Controls.Add(this.listMedicos);
       this.tabPage1.Location = new System.Drawing.Point(4, 27);
       this.tabPage1.Name = "tabPage1";
@@ -344,15 +402,29 @@
       this.tabPage1.TabIndex = 3;
       this.tabPage1.Text = "Lista de Medicos";
       // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.BackColor = System.Drawing.Color.SkyBlue;
+      this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+      this.label8.Location = new System.Drawing.Point(3, 3);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(719, 18);
+      this.label8.TabIndex = 2;
+      this.label8.Text = "Sí desea modificar o eliminar un usuario, debes dar doble clic sobre el usuario a" +
+    "l que deseas hacer la acción";
+      // 
       // listMedicos
       // 
+      this.listMedicos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.listMedicos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.listMedicos.Dock = System.Windows.Forms.DockStyle.Fill;
       this.listMedicos.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listMedicos.Location = new System.Drawing.Point(3, 3);
+      this.listMedicos.Location = new System.Drawing.Point(3, 24);
       this.listMedicos.Name = "listMedicos";
-      this.listMedicos.Size = new System.Drawing.Size(786, 413);
+      this.listMedicos.Size = new System.Drawing.Size(786, 392);
       this.listMedicos.TabIndex = 1;
       this.listMedicos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTableMedico);
       // 
@@ -390,46 +462,6 @@
       this.saveFile.FileName = "TemplateUsuarios.xlsx";
       this.saveFile.Filter = "Archivos Excel|*.xlsx;*.xls;*.xlsm";
       // 
-      // btnLoad
-      // 
-      this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
-      this.btnLoad.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnLoad.Location = new System.Drawing.Point(405, 84);
-      this.btnLoad.Name = "btnLoad";
-      this.btnLoad.Size = new System.Drawing.Size(166, 36);
-      this.btnLoad.TabIndex = 1;
-      this.btnLoad.Text = "Cargar Datos";
-      this.btnLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnLoad.UseVisualStyleBackColor = true;
-      this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-      // 
-      // btnDown
-      // 
-      this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
-      this.btnDown.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnDown.Location = new System.Drawing.Point(132, 84);
-      this.btnDown.Name = "btnDown";
-      this.btnDown.Size = new System.Drawing.Size(166, 36);
-      this.btnDown.TabIndex = 2;
-      this.btnDown.Text = "Descargar Plantilla";
-      this.btnDown.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnDown.UseVisualStyleBackColor = true;
-      this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-      // 
-      // tabBulkLoad
-      // 
-      this.tabBulkLoad.Controls.Add(this.btnDown);
-      this.tabBulkLoad.Controls.Add(this.btnLoad);
-      this.tabBulkLoad.Location = new System.Drawing.Point(4, 27);
-      this.tabBulkLoad.Name = "tabBulkLoad";
-      this.tabBulkLoad.Padding = new System.Windows.Forms.Padding(3);
-      this.tabBulkLoad.Size = new System.Drawing.Size(792, 419);
-      this.tabBulkLoad.TabIndex = 1;
-      this.tabBulkLoad.Text = "Cargue Masivo";
-      this.tabBulkLoad.UseVisualStyleBackColor = true;
-      // 
       // FormUsuario
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,9 +476,12 @@
       this.tabAddUser.ResumeLayout(false);
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
+      this.tabBulkLoad.ResumeLayout(false);
       this.tabListUsers.ResumeLayout(false);
+      this.tabListUsers.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listUsuarios)).EndInit();
       this.tabPage1.ResumeLayout(false);
+      this.tabPage1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listMedicos)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTDoc)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errDoc)).EndInit();
@@ -454,7 +489,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.errDir)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTUsu)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTel)).EndInit();
-      this.tabBulkLoad.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -495,5 +529,7 @@
     private System.Windows.Forms.TabPage tabBulkLoad;
     private System.Windows.Forms.Button btnDown;
     private System.Windows.Forms.Button btnLoad;
+    private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.Label label8;
   }
 }

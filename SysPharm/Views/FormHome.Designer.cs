@@ -43,6 +43,10 @@
       this.btnUsuarios = new System.Windows.Forms.Button();
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.pnlContenedor = new System.Windows.Forms.Panel();
+      this.panel3 = new System.Windows.Forms.Panel();
+      this.btnInformes = new System.Windows.Forms.Button();
+      this.panel4 = new System.Windows.Forms.Panel();
+      this.btnEPS = new System.Windows.Forms.Button();
       this.pnlTitulo.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.btnMinWin)).BeginInit();
@@ -65,7 +69,7 @@
       this.pnlTitulo.Dock = System.Windows.Forms.DockStyle.Top;
       this.pnlTitulo.Location = new System.Drawing.Point(0, 0);
       this.pnlTitulo.Name = "pnlTitulo";
-      this.pnlTitulo.Size = new System.Drawing.Size(1200, 35);
+      this.pnlTitulo.Size = new System.Drawing.Size(1050, 35);
       this.pnlTitulo.TabIndex = 1;
       this.pnlTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTitulo_MouseDown);
       // 
@@ -98,7 +102,7 @@
       this.btnMinWin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnMinWin.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnMinWin.Image = ((System.Drawing.Image)(resources.GetObject("btnMinWin.Image")));
-      this.btnMinWin.Location = new System.Drawing.Point(1123, 5);
+      this.btnMinWin.Location = new System.Drawing.Point(973, 5);
       this.btnMinWin.Name = "btnMinWin";
       this.btnMinWin.Size = new System.Drawing.Size(25, 25);
       this.btnMinWin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -112,7 +116,7 @@
       this.btnMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimizar.Image")));
-      this.btnMinimizar.Location = new System.Drawing.Point(1083, 5);
+      this.btnMinimizar.Location = new System.Drawing.Point(933, 5);
       this.btnMinimizar.Name = "btnMinimizar";
       this.btnMinimizar.Size = new System.Drawing.Size(25, 25);
       this.btnMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -125,7 +129,7 @@
       this.btnMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnMaximizar.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnMaximizar.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximizar.Image")));
-      this.btnMaximizar.Location = new System.Drawing.Point(1123, 5);
+      this.btnMaximizar.Location = new System.Drawing.Point(973, 5);
       this.btnMaximizar.Name = "btnMaximizar";
       this.btnMaximizar.Size = new System.Drawing.Size(25, 25);
       this.btnMaximizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -138,7 +142,7 @@
       this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-      this.btnCerrar.Location = new System.Drawing.Point(1163, 5);
+      this.btnCerrar.Location = new System.Drawing.Point(1013, 5);
       this.btnCerrar.Name = "btnCerrar";
       this.btnCerrar.Size = new System.Drawing.Size(25, 25);
       this.btnCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,6 +153,10 @@
       // pnlNav
       // 
       this.pnlNav.BackColor = System.Drawing.SystemColors.ButtonFace;
+      this.pnlNav.Controls.Add(this.panel4);
+      this.pnlNav.Controls.Add(this.btnEPS);
+      this.pnlNav.Controls.Add(this.panel3);
+      this.pnlNav.Controls.Add(this.btnInformes);
       this.pnlNav.Controls.Add(this.panel2);
       this.pnlNav.Controls.Add(this.btnMedicamentos);
       this.pnlNav.Controls.Add(this.panel1);
@@ -223,8 +231,55 @@
       this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlContenedor.Location = new System.Drawing.Point(220, 35);
       this.pnlContenedor.Name = "pnlContenedor";
-      this.pnlContenedor.Size = new System.Drawing.Size(980, 615);
+      this.pnlContenedor.Size = new System.Drawing.Size(830, 615);
       this.pnlContenedor.TabIndex = 3;
+      // 
+      // panel3
+      // 
+      this.panel3.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.panel3.Location = new System.Drawing.Point(0, 277);
+      this.panel3.Name = "panel3";
+      this.panel3.Size = new System.Drawing.Size(10, 35);
+      this.panel3.TabIndex = 3;
+      // 
+      // btnInformes
+      // 
+      this.btnInformes.FlatAppearance.BorderSize = 0;
+      this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnInformes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
+      this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnInformes.Location = new System.Drawing.Point(4, 277);
+      this.btnInformes.Name = "btnInformes";
+      this.btnInformes.Size = new System.Drawing.Size(213, 35);
+      this.btnInformes.TabIndex = 4;
+      this.btnInformes.Text = "Informes";
+      this.btnInformes.UseVisualStyleBackColor = true;
+      // 
+      // panel4
+      // 
+      this.panel4.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.panel4.Location = new System.Drawing.Point(0, 318);
+      this.panel4.Name = "panel4";
+      this.panel4.Size = new System.Drawing.Size(10, 35);
+      this.panel4.TabIndex = 5;
+      // 
+      // btnEPS
+      // 
+      this.btnEPS.FlatAppearance.BorderSize = 0;
+      this.btnEPS.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.btnEPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnEPS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnEPS.Image = ((System.Drawing.Image)(resources.GetObject("btnEPS.Image")));
+      this.btnEPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnEPS.Location = new System.Drawing.Point(4, 318);
+      this.btnEPS.Name = "btnEPS";
+      this.btnEPS.Size = new System.Drawing.Size(213, 35);
+      this.btnEPS.TabIndex = 6;
+      this.btnEPS.Text = "EPS";
+      this.btnEPS.UseVisualStyleBackColor = true;
+      this.btnEPS.Click += new System.EventHandler(this.btnEPS_Click);
       // 
       // FormHome
       // 
@@ -267,5 +322,9 @@
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Panel panel2;
     private System.Windows.Forms.Button btnMedicamentos;
+    private System.Windows.Forms.Panel panel3;
+    private System.Windows.Forms.Button btnInformes;
+    private System.Windows.Forms.Panel panel4;
+    private System.Windows.Forms.Button btnEPS;
   }
 }

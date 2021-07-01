@@ -67,6 +67,9 @@
       this.errTel = new System.Windows.Forms.ErrorProvider(this.components);
       this.openFile = new System.Windows.Forms.OpenFileDialog();
       this.saveFile = new System.Windows.Forms.SaveFileDialog();
+      this.cmbEps = new System.Windows.Forms.ComboBox();
+      this.label9 = new System.Windows.Forms.Label();
+      this.errEps = new System.Windows.Forms.ErrorProvider(this.components);
       this.tabUser.SuspendLayout();
       this.tabAddUser.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -81,6 +84,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.errDir)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTUsu)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTel)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errEps)).BeginInit();
       this.SuspendLayout();
       // 
       // tabUser
@@ -113,6 +117,8 @@
       this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBox1.Controls.Add(this.cmbEps);
+      this.groupBox1.Controls.Add(this.label9);
       this.groupBox1.Controls.Add(this.btnCancel);
       this.groupBox1.Controls.Add(this.btnDel);
       this.groupBox1.Controls.Add(this.btnMod);
@@ -308,7 +314,7 @@
       // 
       this.txtDireccion.Location = new System.Drawing.Point(197, 163);
       this.txtDireccion.Name = "txtDireccion";
-      this.txtDireccion.Size = new System.Drawing.Size(543, 24);
+      this.txtDireccion.Size = new System.Drawing.Size(200, 24);
       this.txtDireccion.TabIndex = 7;
       this.txtDireccion.Leave += new System.EventHandler(this.ValidarDireccion);
       // 
@@ -462,6 +468,27 @@
       this.saveFile.FileName = "TemplateUsuarios.xlsx";
       this.saveFile.Filter = "Archivos Excel|*.xlsx;*.xls;*.xlsm";
       // 
+      // cmbEps
+      // 
+      this.cmbEps.FormattingEnabled = true;
+      this.cmbEps.Location = new System.Drawing.Point(540, 163);
+      this.cmbEps.Name = "cmbEps";
+      this.cmbEps.Size = new System.Drawing.Size(200, 26);
+      this.cmbEps.TabIndex = 18;
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Location = new System.Drawing.Point(432, 166);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(38, 18);
+      this.label9.TabIndex = 17;
+      this.label9.Text = "EPS";
+      // 
+      // errEps
+      // 
+      this.errEps.ContainerControl = this;
+      // 
       // FormUsuario
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,6 +516,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.errDir)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTUsu)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errTel)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errEps)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -531,5 +559,8 @@
     private System.Windows.Forms.Button btnLoad;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.ComboBox cmbEps;
+    private System.Windows.Forms.Label label9;
+    private System.Windows.Forms.ErrorProvider errEps;
   }
 }

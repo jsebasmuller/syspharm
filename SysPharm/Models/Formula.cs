@@ -20,11 +20,15 @@ namespace SysPharm.Models
     public string IdPaciente { get; set; }
     [ForeignKey("Servicio")]
     public int IdServicio { get; set; }
-       
+    public int TotalMedicamentos { get; set; }
+    public double TotalCompra { get; set; }
+    public double TotalVenta { get; set; }
+
     #region Propiedades de Navegación
     public Usuario Medico { get; set; }
     public Usuario Paciente { get; set; }
     public Servicio Servicio { get; set; }
+    public List<DetalleFormula> DetalleFormula { get; set; }
     #endregion
   }
 }

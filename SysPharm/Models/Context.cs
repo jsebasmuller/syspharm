@@ -16,6 +16,8 @@ namespace SysPharm.Models
     public DbSet<Medicamento> Medicamentos { get; set; }
     public DbSet<Eps> Eps { get; set; }
     public DbSet<Formula> Formulas { get; set; }
+    public DbSet<DetalleFormula> DetallesFormula { get; set; }
+    public DbSet<DetallePedido> DetallesPedido { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<Servicio> Servicios { get; set; }
     public DbSet<TipoDocumento> TiposDocumento { get; set; }

@@ -91,5 +91,10 @@ namespace SysPharm.Views
     {
       abrirForm(new FormEPS());
     }
+
+    private void btnServicio_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormServicio());
+    }
   }
 }

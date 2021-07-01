@@ -14,6 +14,8 @@ namespace SysPharm.Models
     public string Documento { get; set; }
     [ForeignKey("TipoDocumento")]
     public int IdTipoDocumento { get; set; }
+    [ForeignKey("Eps")]
+    public int IdEps { get; set; }
     [StringLength(250)]
     public string Nombres { get; set; }
     [StringLength(100)]
@@ -26,6 +28,7 @@ namespace SysPharm.Models
 
     #region Propiedades de Navegación
     public TipoDocumento TipoDocumento { get; set; }
+    public Eps Eps { get; set; }
     #endregion
   }
 }

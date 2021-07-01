@@ -11,9 +11,15 @@ namespace SysPharm.Models
   {
     [Key]
     public string Id { get; set; }
-    public DateTime FechaPedido { get; set; }
-    public DateTime FechaIngreso { get; set; }
-    public string RegSanitario { get; set; }
-    public string Lote { get; set; }
+    [StringLength(500)]
+    public string Nombre { get; set; }
+    public int Cantidad { get; set; }
+    public double VlrCompra { get; set; }
+    public double VlrVenta { get; set; }
+
+    #region Propiedades de navegación
+    public List<DetalleFormula> DetallesFormula { get; set; }
+    public List<DetallePedido> DetallesPedido { get; set; }
+    #endregion
   }
 }

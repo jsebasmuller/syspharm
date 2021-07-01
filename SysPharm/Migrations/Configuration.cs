@@ -1,4 +1,4 @@
-﻿namespace SysPharm.Migrations
+﻿namespace Proyecto_Farmacia.Migrations
 {
     using System;
     using System.Data.Entity;

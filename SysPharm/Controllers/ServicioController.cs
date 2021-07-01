@@ -15,24 +15,24 @@ using SysPharm.Helpers;
 
 namespace SysPharm.Controllers
 {
-  public class EPSController
+  public class ServicioController
   {
     private readonly Context _context;
 
-    public EPSController(Context context)
+    public ServicioController(Context context)
     {
       _context = context;
     }
 
-    public ResponseViewModel RegisterEPS(Eps eps)
+    public ResponseViewModel RegisterServicio(Servicio servicio)
     {
       var response = new ResponseViewModel();
-      _context.Eps.Add(eps);
+      _context.Servicios.Add(servicio);
       try
       {
         _context.SaveChanges();
         response.Respuesta = true;
-        response.Mensaje = "¡EPS Creada Satisfactoriamente!";
+        response.Mensaje = "¡Servicio Creado Satisfactoriamente!";
       }catch(Exception e)
       {
         response.Respuesta = false;
@@ -41,22 +41,22 @@ namespace SysPharm.Controllers
       return response;
     }
 
-    public ResponseViewModel UpdateEPS(Eps eps)
+    public ResponseViewModel UpdateServicio(Servicio servicio)
     {
       var response = new ResponseViewModel();
-      var epsDB = _context.Eps.Where(x => x.Id == eps.Id).FirstOrDefault();
-      if(epsDB == null)
+      var servicioDB = _context.Servicios.Where(x => x.Id == servicio.Id).FirstOrDefault();
+      if(servicioDB == null)
       {
         response.Respuesta = false;
-        response.Mensaje = "EPS no encontrada";
+        response.Mensaje = "Servicio no encontrada";
         return response;
       }
-      epsDB.Nombre = eps.Nombre;
+      servicioDB.Nombre = servicio.Nombre;
       try
       {
         _context.SaveChanges();
         response.Respuesta = true;
-        response.Mensaje = "¡EPS Modificada Satisfactoriamente!";
+        response.Mensaje = "¡Servicio Modificado Satisfactoriamente!";
       }catch(Exception e)
       {
         response.Mensaje = e.Message;
@@ -65,18 +65,18 @@ namespace SysPharm.Controllers
       return response;
     }
 
-    public ResponseViewModel DeleteEPS(int idEps)
+    public ResponseViewModel DeleteServicio(int idServicio)
     {
       var response = new ResponseViewModel();
-      var epsDB = _context.Eps.Where(x => x.Id == idEps).FirstOrDefault();
-      if (epsDB != null)
+      var servicioDB = _context.Servicios.Where(x => x.Id == idServicio).FirstOrDefault();
+      if (servicioDB != null)
       {
-        _context.Eps.Remove(epsDB);
+        _context.Servicios.Remove(servicioDB);
         try
         {
           _context.SaveChanges();
           response.Respuesta = true;
-          response.Mensaje = "¡EPS Eliminada!";
+          response.Mensaje = "¡Servicio Eliminado!";
         }catch(Exception e)
         {
           response.Mensaje = e.Message;
@@ -85,14 +85,14 @@ namespace SysPharm.Controllers
         }
         return response;
       }
-      response.Mensaje = "EPS no encontrada";
+      response.Mensaje = "Servicio no encontrado";
       response.Respuesta = false;
       return response;
     }
 
-    public List<Eps> GetEps()
+    public List<Servicio> GetServicios()
     {
-      return _context.Eps.ToList();
+      return _context.Servicios.ToList();
     }
   }
 }

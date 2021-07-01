@@ -15,5 +15,10 @@ namespace SysPharm.Models
     public string Proveedor { get; set; }
     public DateTime FechaPedido { get; set; }
     public DateTime FechaIngreso { get; set; }
+    public double VlrTotal { get; set; }
+
+    #region Propiedades de navegación
+    public List<DetallePedido> DetallesPedido { get; set; }
+    #endregion
   }
 }

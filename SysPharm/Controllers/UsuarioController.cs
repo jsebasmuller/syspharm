@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Syncfusion.Drawing;
 using Syncfusion.XlsIO;
-using System.Data.Entity;
-using Proyecto_Farmacia.Models.ViewModel;
+using SysPharm.Models.ViewModel;
 using System.IO;
 using SysPharm.Helpers;
+using System.Data.Entity;
 
 namespace SysPharm.Controllers
 {
@@ -61,6 +61,7 @@ namespace SysPharm.Controllers
       }
       userDB.Documento = user.Documento;
       userDB.IdTipoDocumento = user.IdTipoDocumento;
+      userDB.IdEps = user.IdEps;
       userDB.Nombres = user.Nombres;
       userDB.Telefono = user.Telefono;
       userDB.TipoUsuario = user.TipoUsuario;
@@ -107,13 +108,15 @@ namespace SysPharm.Controllers
     {
       return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "paciente")
                               .Include(x => x.TipoDocumento)
+                              .Include(x => x.Eps)
                               .Select(x => new PacienteViewModel
                               {
                                 Documento = x.Documento,
                                 TipoDocumento = x.TipoDocumento.Nombre,
                                 Nombres = x.Nombres,
                                 Direccion = x.Direccion,
-                                Telefono = x.Telefono
+                                Telefono = x.Telefono,
+                                EPS = x.Eps.Nombre
                               }).ToList();
     }
 
@@ -121,13 +124,15 @@ namespace SysPharm.Controllers
     {
       return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "medico")
                               .Include(x => x.TipoDocumento)
+                              .Include(x => x.Eps)
                               .Select(x => new PacienteViewModel
                               {
                                 Documento = x.Documento,
                                 TipoDocumento = x.TipoDocumento.Nombre,
                                 Nombres = x.Nombres,
                                 Direccion = x.Direccion,
-                                Telefono = x.Telefono
+                                Telefono = x.Telefono,
+                                EPS = x.Eps.Nombre
                               }).ToList();
     }
 
@@ -205,6 +210,19 @@ namespace SysPharm.Controllers
           {
             stringError += (string.IsNullOrEmpty(stringError) ? "" : ", ") + "Debe seleccionar un tipo de usuario";
           }
+
+          if (string.IsNullOrEmpty(worksheet.Range[$"G{row}"].Value) && string.IsNullOrWhiteSpace(worksheet.Range[$"G{row}"].Value))
+          {
+            stringError += (string.IsNullOrEmpty(stringError) ? "" : ", ") + "Debe seleccionar un tipo de usuario";
+          }
+
+          var stringEps = worksheet.Range[$"G{row}"].Value;
+          var Eps = _context.Eps.Where(x => x.Nombre.Trim().ToLower() == stringEps.Trim().ToLower()).FirstOrDefault();
+          if (Eps == null)
+          {
+            stringError = $"La EPS {worksheet.Range[$"G{row}"].Value} no se encuentra en la base de datos";
+          }
+
           if (!string.IsNullOrEmpty(stringError))
           {
             sb.AppendLine($"Linea {row}: {stringError}");
@@ -248,6 +266,9 @@ namespace SysPharm.Controllers
           usuario.Direccion = worksheet.Range[$"D{row}"].Value.Trim();
           usuario.Telefono = worksheet.Range[$"E{row}"].Value.Trim();
           usuario.TipoUsuario = worksheet.Range[$"F{row}"].Value.Trim();
+          var stringEps = worksheet.Range[$"G{row}"].Value;
+          var eps = _context.Eps.Where(x => x.Nombre.Trim().ToLower() == stringEps.Trim().ToLower()).FirstOrDefault();
+          usuario.IdEps = eps.Id;
           _context.Usuarios.Add(usuario);
           if (count == 100)
           {

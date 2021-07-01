@@ -16,11 +16,14 @@ namespace SysPharm.Views
   public partial class FormUsuario : Form
   {
     UsuarioController userControl = new UsuarioController(new Context());
+    EPSController epsControl = new EPSController(new Context());
     List<TipoDocumento> listTDoc;
     List<TipoDocumento> listTUsu = new List<TipoDocumento>();
+    List<Eps> listEps;
     bool valNames = false;
     bool valDoc = false;
     bool valTDoc = false;
+    bool valEps = false;
     bool valDir = false;
     bool valTel = false;
     bool valTUs = false;
@@ -31,6 +34,7 @@ namespace SysPharm.Views
       RefrescarListaPacientes();
       RefrescarListaMedicos();
       ObtenerTipoDocumentos();
+      ObtenerEps();
       ObtenerTipoUsuario();
     }
 
@@ -62,6 +66,14 @@ namespace SysPharm.Views
       cmbTDoc.ValueMember = "Id";
     }
 
+    private void ObtenerEps()
+    {
+      cmbEps.DataSource = epsControl.GetEps();
+      listEps = epsControl.GetEps();
+      cmbEps.DisplayMember = "Nombre";
+      cmbEps.ValueMember = "Id";
+    }
+
     private void ObtenerTipoUsuario()
     {
       listTUsu.Add(new TipoDocumento() { Id = 1, Nombre = "Medico" });
@@ -73,7 +85,7 @@ namespace SysPharm.Views
 
     private bool ValidarCampos(object sender, EventArgs e)
     {
-      if (valNames && valTDoc && valTel && valTUs && valDir && valDoc)
+      if (valNames && valTDoc && valTel && valTUs && valDir && valDoc && valEps)
       {
         return true;
       }
@@ -85,6 +97,7 @@ namespace SysPharm.Views
         ValidarTelefono(sender, e);
         ValidarTipoDocumento(sender, e);
         ValidarTipoUsuario(sender, e);
+        ValidarEps(sender, e);
         return false;
       }
     }
@@ -96,6 +109,7 @@ namespace SysPharm.Views
         Usuario usuario = new Usuario();
         usuario.Documento = txtDoc.Text;
         usuario.IdTipoDocumento = Int32.Parse(cmbTDoc.SelectedValue.ToString());
+        usuario.IdEps = Int32.Parse(cmbEps.SelectedValue.ToString());
         usuario.Nombres = txtNombres.Text;
         usuario.Telefono = txtTel.Text;
         usuario.TipoUsuario = cmbTUsu.GetItemText(cmbTUsu.SelectedItem);
@@ -179,6 +193,20 @@ namespace SysPharm.Views
       }
     }
 
+    private void ValidarEps(object sender, EventArgs e)
+    {
+      if (cmbEps.SelectedValue == null)
+      {
+        valEps = false;
+        errEps.SetError(cmbEps, "Debe seleccionar una opción");
+      }
+      else
+      {
+        valEps = true;
+        errEps.SetError(cmbEps, "");
+      }
+    }
+
     private void ValidarDireccion(object sender, EventArgs e)
     {
       if (txtDireccion.Text == "" || txtDireccion.Text == " ")
@@ -241,6 +269,7 @@ namespace SysPharm.Views
       txtDoc.Text = table == "paciente" ? listUsuarios[0, pos].Value.ToString() : listMedicos[0, pos].Value.ToString();
       txtDoc.ReadOnly = true;
       cmbTDoc.SelectedValue = table == "paciente" ? listTDoc.Where(x => x.Nombre == listUsuarios[1, pos].Value.ToString()).FirstOrDefault().Id : listTDoc.Where(x => x.Nombre == listMedicos[1, pos].Value.ToString()).FirstOrDefault().Id;
+      cmbEps.SelectedValue = table == "paciente" ? listEps.Where(x => x.Nombre == listUsuarios[5, pos].Value.ToString()).FirstOrDefault().Id : listEps.Where(x => x.Nombre == listMedicos[5, pos].Value.ToString()).FirstOrDefault().Id;
       txtNombres.Text = table == "paciente" ? listUsuarios[2, pos].Value.ToString() : listMedicos[2, pos].Value.ToString();
       txtDireccion.Text = table == "paciente" ? listUsuarios[3, pos].Value.ToString() : listMedicos[3, pos].Value.ToString();
       cmbTUsu.SelectedValue = table == "paciente" ? listTUsu.Where(x => x.Nombre == "Paciente").FirstOrDefault().Id : listTUsu.Where(x => x.Nombre == "Medico").FirstOrDefault().Id;
@@ -269,6 +298,7 @@ namespace SysPharm.Views
         usuario.Nombres = txtNombres.Text;
         usuario.Telefono = txtTel.Text;
         usuario.TipoUsuario = cmbTUsu.GetItemText(cmbTUsu.SelectedItem);
+        usuario.IdEps = Int32.Parse(cmbEps.SelectedValue.ToString());
         usuario.Direccion = txtDireccion.Text;
         var success = userControl.UpdateUser(usuario);
         if (success.Respuesta)

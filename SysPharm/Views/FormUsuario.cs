@@ -1,5 +1,6 @@
 ﻿using SysPharm.Controllers;
 using SysPharm.Models;
+using SysPharm.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,8 @@ namespace SysPharm.Views
   {
     UsuarioController userControl = new UsuarioController(new Context());
     EPSController epsControl = new EPSController(new Context());
+    List<PacienteViewModel> listPacientes = new List<PacienteViewModel>();
+    List<PacienteViewModel> listaMedicos = new List<PacienteViewModel>();
     List<TipoDocumento> listTDoc;
     List<TipoDocumento> listTUsu = new List<TipoDocumento>();
     List<Eps> listEps;
@@ -40,7 +43,16 @@ namespace SysPharm.Views
 
     private void RefrescarListaPacientes()
     {
-      listUsuarios.DataSource = userControl.GetPacientes();
+      listPacientes = userControl.GetPacientes();
+      if (!txtBuscarPac.Text.Trim().Equals(""))
+      {
+        listPacientes = listPacientes.Where(x => x.Documento.Contains(txtBuscarPac.Text.Trim()) || 
+                                            x.Nombres.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower()) || 
+                                            x.Telefono.Trim().Contains(txtBuscarPac.Text.Trim()) ||
+                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower()) ||
+                                            x.EPS.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower())).ToList();
+      }
+      listUsuarios.DataSource = listPacientes;
       listUsuarios.Columns[1].HeaderText = "Tipo de Documento";
       listUsuarios.Columns[3].HeaderText = "Dirección";
       listUsuarios.Columns[4].HeaderText = "Teléfono";
@@ -50,7 +62,16 @@ namespace SysPharm.Views
 
     private void RefrescarListaMedicos()
     {
-      listMedicos.DataSource = userControl.GetMedicos();
+      listaMedicos = userControl.GetMedicos();
+      if (!txtBuscarMed.Text.Trim().Equals(""))
+      {
+        listaMedicos = listaMedicos.Where(x => x.Documento.Contains(txtBuscarMed.Text.Trim()) ||
+                                            x.Nombres.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower()) ||
+                                            x.Telefono.Trim().Contains(txtBuscarMed.Text.Trim()) ||
+                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower()) ||
+                                            x.EPS.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower())).ToList();
+      }
+      listMedicos.DataSource = listaMedicos;
       listMedicos.Columns[1].HeaderText = "Tipo de Documento";
       listMedicos.Columns[3].HeaderText = "Dirección";
       listMedicos.Columns[4].HeaderText = "Teléfono";
@@ -432,6 +453,16 @@ namespace SysPharm.Views
           userControl = new UsuarioController(new Context());
         }
       }
+    }
+
+    private void txtBuscar_TextChanged(object sender, EventArgs e)
+    {
+      RefrescarListaPacientes();
+    }
+
+    private void txtBuscarMed_TextChanged(object sender, EventArgs e)
+    {
+      RefrescarListaMedicos();
     }
   }
 }

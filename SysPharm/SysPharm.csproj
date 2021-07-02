@@ -67,13 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MedicamentoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\EPSController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Helpers\IRangeValidator.cs" />
-    <Compile Include="Migrations\202107010419501_Init.cs" />
-    <Compile Include="Migrations\202107010419501_Init.designer.cs">
-      <DependentUpon>202107010419501_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202107020130566_init.cs" />
+    <Compile Include="Migrations\202107020130566_init.designer.cs">
+      <DependentUpon>202107020130566_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DetalleFormula.cs" />
@@ -87,11 +88,35 @@
     <Compile Include="Views\FormEPS.Designer.cs">
       <DependentUpon>FormEPS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FormFormula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormFormula.Designer.cs">
+      <DependentUpon>FormFormula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\FormHome.Designer.cs">
       <DependentUpon>FormHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormInforme.Designer.cs">
+      <DependentUpon>FormInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormMedicamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormMedicamento.Designer.cs">
+      <DependentUpon>FormMedicamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormPedido.Designer.cs">
+      <DependentUpon>FormPedido.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\FormServicio.cs">
       <SubType>Form</SubType>
@@ -121,8 +146,8 @@
     <Compile Include="Views\FormUsuario.Designer.cs">
       <DependentUpon>FormUsuario.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Migrations\202107010419501_Init.resx">
-      <DependentUpon>202107010419501_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107020130566_init.resx">
+      <DependentUpon>202107020130566_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,8 +161,20 @@
     <EmbeddedResource Include="Views\FormEPS.resx">
       <DependentUpon>FormEPS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormFormula.resx">
+      <DependentUpon>FormFormula.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormInforme.resx">
+      <DependentUpon>FormInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormMedicamento.resx">
+      <DependentUpon>FormMedicamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormPedido.resx">
+      <DependentUpon>FormPedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormServicio.resx">
       <DependentUpon>FormServicio.cs</DependentUpon>

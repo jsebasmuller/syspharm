@@ -15,6 +15,7 @@ namespace SysPharm.Views
   public partial class FormEPS : Form
   {
     EPSController epsControl = new EPSController(new Context());
+    List<Eps> listEps = new List<Eps>();
     bool valName = false;
 
     public FormEPS()
@@ -25,7 +26,12 @@ namespace SysPharm.Views
 
     private void RefrescarListaEPS()
     {
-      listEPS.DataSource = epsControl.GetEps();
+      listEps = epsControl.GetEps();
+      if (!txtBuscar.Text.Trim().Equals(""))
+      {
+        listEps = listEps.Where(x => x.Nombre.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())).ToList();
+      }
+      listEPS.DataSource = listEps;
       listEPS.AutoResizeColumns();
       listEPS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
     }
@@ -194,6 +200,11 @@ namespace SysPharm.Views
     private void LimpiarDatos(object sender, EventArgs e)
     {
       txtNomEps.Text = "";
+    }
+
+    private void txtBuscar_TextChanged(object sender, EventArgs e)
+    {
+      RefrescarListaEPS();
     }
   }
 }

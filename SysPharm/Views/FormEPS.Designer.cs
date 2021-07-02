@@ -40,6 +40,8 @@
       this.txtNomEps = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.label10 = new System.Windows.Forms.Label();
+      this.txtBuscar = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.listEPS = new System.Windows.Forms.DataGridView();
       this.errNomEps = new System.Windows.Forms.ErrorProvider(this.components);
@@ -170,6 +172,8 @@
       // tabPage2
       // 
       this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage2.Controls.Add(this.label10);
+      this.tabPage2.Controls.Add(this.txtBuscar);
       this.tabPage2.Controls.Add(this.label7);
       this.tabPage2.Controls.Add(this.listEPS);
       this.tabPage2.Location = new System.Drawing.Point(4, 27);
@@ -178,6 +182,23 @@
       this.tabPage2.Size = new System.Drawing.Size(792, 419);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Lista de EPS";
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(4, 25);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(72, 18);
+      this.label10.TabIndex = 5;
+      this.label10.Text = "Buscador";
+      // 
+      // txtBuscar
+      // 
+      this.txtBuscar.Location = new System.Drawing.Point(82, 24);
+      this.txtBuscar.Name = "txtBuscar";
+      this.txtBuscar.Size = new System.Drawing.Size(365, 24);
+      this.txtBuscar.TabIndex = 4;
+      this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
       // 
       // label7
       // 
@@ -199,9 +220,9 @@
       this.listEPS.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listEPS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listEPS.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listEPS.Location = new System.Drawing.Point(3, 24);
+      this.listEPS.Location = new System.Drawing.Point(3, 54);
       this.listEPS.Name = "listEPS";
-      this.listEPS.Size = new System.Drawing.Size(786, 392);
+      this.listEPS.Size = new System.Drawing.Size(786, 362);
       this.listEPS.TabIndex = 2;
       this.listEPS.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
@@ -245,5 +266,7 @@
     private System.Windows.Forms.ErrorProvider errNomEps;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.DataGridView listEPS;
+    private System.Windows.Forms.Label label10;
+    private System.Windows.Forms.TextBox txtBuscar;
   }
 }

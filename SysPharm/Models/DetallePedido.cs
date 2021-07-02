@@ -13,7 +13,7 @@ namespace SysPharm.Models
     [Key]
     public int Id { get; set; }
     [ForeignKey("Medicamento")]
-    public string IdMedicamento { get; set; }
+    public int IdMedicamento { get; set; }
     [ForeignKey("Pedido")]
     public string IdPedido { get; set; }
     [StringLength(50)]

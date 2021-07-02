@@ -15,6 +15,7 @@ namespace SysPharm.Views
   public partial class FormServicio : Form
   {
     ServicioController servicioControl = new ServicioController(new Context());
+    List<Servicio> listaServicios = new List<Servicio>();
     bool valName = false;
 
     public FormServicio()
@@ -25,7 +26,12 @@ namespace SysPharm.Views
 
     private void RefrescarListaServicios()
     {
-      listSer.DataSource = servicioControl.GetServicios();
+      listaServicios = servicioControl.GetServicios();
+      if (!txtBuscar.Text.Trim().Equals(""))
+      {
+        listaServicios = listaServicios.Where(x => x.Nombre.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())).ToList();
+      }
+      listSer.DataSource = listaServicios;
       listSer.AutoResizeColumns();
       listSer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
     }
@@ -194,6 +200,11 @@ namespace SysPharm.Views
     private void LimpiarDatos(object sender, EventArgs e)
     {
       txtNomSer.Text = "";
+    }
+
+    private void txtBuscar_TextChanged(object sender, EventArgs e)
+    {
+      RefrescarListaServicios();
     }
   }
 }

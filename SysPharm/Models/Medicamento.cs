@@ -10,7 +10,7 @@ namespace SysPharm.Models
   public class Medicamento
   {
     [Key]
-    public string Id { get; set; }
+    public int Id { get; set; }
     [StringLength(500)]
     public string Nombre { get; set; }
     public int Cantidad { get; set; }

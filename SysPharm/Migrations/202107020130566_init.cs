@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -13,14 +13,14 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         IdFormula = c.String(maxLength: 128),
-                        IdMedicamento = c.String(maxLength: 128),
+                        IdMedicamento = c.Int(nullable: false),
                         Cantidad = c.Int(nullable: false),
                         PrecioCompra = c.Double(nullable: false),
                         PrecioVenta = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Formula", t => t.IdFormula)
-                .ForeignKey("dbo.Medicamento", t => t.IdMedicamento)
+                .ForeignKey("dbo.Medicamento", t => t.IdMedicamento, cascadeDelete: true)
                 .Index(t => t.IdFormula)
                 .Index(t => t.IdMedicamento);
             
@@ -95,7 +95,7 @@
                 "dbo.Medicamento",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
                         Nombre = c.String(maxLength: 500),
                         Cantidad = c.Int(nullable: false),
                         VlrCompra = c.Double(nullable: false),
@@ -108,7 +108,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        IdMedicamento = c.String(maxLength: 128),
+                        IdMedicamento = c.Int(nullable: false),
                         IdPedido = c.String(maxLength: 128),
                         Lote = c.String(maxLength: 50),
                         RegSanitario = c.String(maxLength: 50),
@@ -118,7 +118,7 @@
                         VlrVenta = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Medicamento", t => t.IdMedicamento)
+                .ForeignKey("dbo.Medicamento", t => t.IdMedicamento, cascadeDelete: true)
                 .ForeignKey("dbo.Pedido", t => t.IdPedido)
                 .Index(t => t.IdMedicamento)
                 .Index(t => t.IdPedido);

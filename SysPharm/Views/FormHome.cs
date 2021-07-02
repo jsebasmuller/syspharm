@@ -68,7 +68,7 @@ namespace SysPharm.Views
 
     private void button2_Click(object sender, EventArgs e)
     {
-
+      abrirForm(new FormMedicamento());
     }
     [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
     private extern static void ReleaseCapture();
@@ -95,6 +95,21 @@ namespace SysPharm.Views
     private void btnServicio_Click(object sender, EventArgs e)
     {
       abrirForm(new FormServicio());
+    }
+
+    private void btnPedidos_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormPedido());
+    }
+
+    private void btnFormula_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormFormula());
+    }
+
+    private void btnInformes_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormInforme());
     }
   }
 }

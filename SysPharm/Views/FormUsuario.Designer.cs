@@ -33,6 +33,8 @@
       this.tabUser = new System.Windows.Forms.TabControl();
       this.tabAddUser = new System.Windows.Forms.TabPage();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.cmbEps = new System.Windows.Forms.ComboBox();
+      this.label9 = new System.Windows.Forms.Label();
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnDel = new System.Windows.Forms.Button();
       this.btnMod = new System.Windows.Forms.Button();
@@ -54,9 +56,13 @@
       this.btnDown = new System.Windows.Forms.Button();
       this.btnLoad = new System.Windows.Forms.Button();
       this.tabListUsers = new System.Windows.Forms.TabPage();
+      this.label10 = new System.Windows.Forms.Label();
+      this.txtBuscarPac = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.listUsuarios = new System.Windows.Forms.DataGridView();
       this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.label11 = new System.Windows.Forms.Label();
+      this.txtBuscarMed = new System.Windows.Forms.TextBox();
       this.label8 = new System.Windows.Forms.Label();
       this.listMedicos = new System.Windows.Forms.DataGridView();
       this.errTDoc = new System.Windows.Forms.ErrorProvider(this.components);
@@ -67,8 +73,6 @@
       this.errTel = new System.Windows.Forms.ErrorProvider(this.components);
       this.openFile = new System.Windows.Forms.OpenFileDialog();
       this.saveFile = new System.Windows.Forms.SaveFileDialog();
-      this.cmbEps = new System.Windows.Forms.ComboBox();
-      this.label9 = new System.Windows.Forms.Label();
       this.errEps = new System.Windows.Forms.ErrorProvider(this.components);
       this.tabUser.SuspendLayout();
       this.tabAddUser.SuspendLayout();
@@ -142,6 +146,23 @@
       this.groupBox1.TabIndex = 14;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Datos del Usuario";
+      // 
+      // cmbEps
+      // 
+      this.cmbEps.FormattingEnabled = true;
+      this.cmbEps.Location = new System.Drawing.Point(540, 163);
+      this.cmbEps.Name = "cmbEps";
+      this.cmbEps.Size = new System.Drawing.Size(200, 26);
+      this.cmbEps.TabIndex = 18;
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Location = new System.Drawing.Point(432, 166);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(38, 18);
+      this.label9.TabIndex = 17;
+      this.label9.Text = "EPS";
       // 
       // btnCancel
       // 
@@ -360,6 +381,8 @@
       // 
       // tabListUsers
       // 
+      this.tabListUsers.Controls.Add(this.label10);
+      this.tabListUsers.Controls.Add(this.txtBuscarPac);
       this.tabListUsers.Controls.Add(this.label7);
       this.tabListUsers.Controls.Add(this.listUsuarios);
       this.tabListUsers.Location = new System.Drawing.Point(4, 27);
@@ -369,6 +392,23 @@
       this.tabListUsers.TabIndex = 2;
       this.tabListUsers.Text = "Lista de Pacientes";
       this.tabListUsers.UseVisualStyleBackColor = true;
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(4, 25);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(72, 18);
+      this.label10.TabIndex = 3;
+      this.label10.Text = "Buscador";
+      // 
+      // txtBuscarPac
+      // 
+      this.txtBuscarPac.Location = new System.Drawing.Point(82, 24);
+      this.txtBuscarPac.Name = "txtBuscarPac";
+      this.txtBuscarPac.Size = new System.Drawing.Size(365, 24);
+      this.txtBuscarPac.TabIndex = 2;
+      this.txtBuscarPac.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
       // 
       // label7
       // 
@@ -390,15 +430,17 @@
       this.listUsuarios.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listUsuarios.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listUsuarios.Location = new System.Drawing.Point(3, 24);
+      this.listUsuarios.Location = new System.Drawing.Point(3, 54);
       this.listUsuarios.Name = "listUsuarios";
-      this.listUsuarios.Size = new System.Drawing.Size(786, 392);
+      this.listUsuarios.Size = new System.Drawing.Size(786, 362);
       this.listUsuarios.TabIndex = 0;
       this.listUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
       // tabPage1
       // 
       this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage1.Controls.Add(this.label11);
+      this.tabPage1.Controls.Add(this.txtBuscarMed);
       this.tabPage1.Controls.Add(this.label8);
       this.tabPage1.Controls.Add(this.listMedicos);
       this.tabPage1.Location = new System.Drawing.Point(4, 27);
@@ -407,6 +449,23 @@
       this.tabPage1.Size = new System.Drawing.Size(792, 419);
       this.tabPage1.TabIndex = 3;
       this.tabPage1.Text = "Lista de Medicos";
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(4, 25);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(72, 18);
+      this.label11.TabIndex = 5;
+      this.label11.Text = "Buscador";
+      // 
+      // txtBuscarMed
+      // 
+      this.txtBuscarMed.Location = new System.Drawing.Point(82, 24);
+      this.txtBuscarMed.Name = "txtBuscarMed";
+      this.txtBuscarMed.Size = new System.Drawing.Size(365, 24);
+      this.txtBuscarMed.TabIndex = 4;
+      this.txtBuscarMed.TextChanged += new System.EventHandler(this.txtBuscarMed_TextChanged);
       // 
       // label8
       // 
@@ -428,9 +487,9 @@
       this.listMedicos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listMedicos.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listMedicos.Location = new System.Drawing.Point(3, 24);
+      this.listMedicos.Location = new System.Drawing.Point(3, 54);
       this.listMedicos.Name = "listMedicos";
-      this.listMedicos.Size = new System.Drawing.Size(786, 392);
+      this.listMedicos.Size = new System.Drawing.Size(786, 362);
       this.listMedicos.TabIndex = 1;
       this.listMedicos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTableMedico);
       // 
@@ -467,23 +526,6 @@
       // 
       this.saveFile.FileName = "TemplateUsuarios.xlsx";
       this.saveFile.Filter = "Archivos Excel|*.xlsx;*.xls;*.xlsm";
-      // 
-      // cmbEps
-      // 
-      this.cmbEps.FormattingEnabled = true;
-      this.cmbEps.Location = new System.Drawing.Point(540, 163);
-      this.cmbEps.Name = "cmbEps";
-      this.cmbEps.Size = new System.Drawing.Size(200, 26);
-      this.cmbEps.TabIndex = 18;
-      // 
-      // label9
-      // 
-      this.label9.AutoSize = true;
-      this.label9.Location = new System.Drawing.Point(432, 166);
-      this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(38, 18);
-      this.label9.TabIndex = 17;
-      this.label9.Text = "EPS";
       // 
       // errEps
       // 
@@ -562,5 +604,9 @@
     private System.Windows.Forms.ComboBox cmbEps;
     private System.Windows.Forms.Label label9;
     private System.Windows.Forms.ErrorProvider errEps;
+    private System.Windows.Forms.TextBox txtBuscarPac;
+    private System.Windows.Forms.Label label10;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.TextBox txtBuscarMed;
   }
 }

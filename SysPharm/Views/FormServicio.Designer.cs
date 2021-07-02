@@ -43,6 +43,8 @@
       this.label7 = new System.Windows.Forms.Label();
       this.listSer = new System.Windows.Forms.DataGridView();
       this.errNom = new System.Windows.Forms.ErrorProvider(this.components);
+      this.label11 = new System.Windows.Forms.Label();
+      this.txtBuscar = new System.Windows.Forms.TextBox();
       this.tabEps.SuspendLayout();
       this.tabAddSer.SuspendLayout();
       this.tabPage2.SuspendLayout();
@@ -170,6 +172,8 @@
       // tabPage2
       // 
       this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage2.Controls.Add(this.label11);
+      this.tabPage2.Controls.Add(this.txtBuscar);
       this.tabPage2.Controls.Add(this.label7);
       this.tabPage2.Controls.Add(this.listSer);
       this.tabPage2.Location = new System.Drawing.Point(4, 27);
@@ -199,15 +203,32 @@
       this.listSer.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
       this.listSer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listSer.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listSer.Location = new System.Drawing.Point(3, 24);
+      this.listSer.Location = new System.Drawing.Point(3, 54);
       this.listSer.Name = "listSer";
-      this.listSer.Size = new System.Drawing.Size(786, 392);
+      this.listSer.Size = new System.Drawing.Size(786, 362);
       this.listSer.TabIndex = 2;
       this.listSer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
       // errNom
       // 
       this.errNom.ContainerControl = this;
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(4, 25);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(72, 18);
+      this.label11.TabIndex = 7;
+      this.label11.Text = "Buscador";
+      // 
+      // txtBuscar
+      // 
+      this.txtBuscar.Location = new System.Drawing.Point(82, 24);
+      this.txtBuscar.Name = "txtBuscar";
+      this.txtBuscar.Size = new System.Drawing.Size(365, 24);
+      this.txtBuscar.TabIndex = 6;
+      this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
       // 
       // FormServicio
       // 
@@ -245,5 +266,7 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.DataGridView listSer;
     private System.Windows.Forms.ErrorProvider errNom;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.TextBox txtBuscar;
   }
 }

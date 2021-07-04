@@ -31,6 +31,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHome));
       this.pnlTitulo = new System.Windows.Forms.Panel();
       this.label1 = new System.Windows.Forms.Label();
+      this.label2 = new System.Windows.Forms.Label();
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.btnMinWin = new System.Windows.Forms.PictureBox();
       this.btnMinimizar = new System.Windows.Forms.PictureBox();
@@ -67,6 +68,7 @@
       // 
       this.pnlTitulo.BackColor = System.Drawing.SystemColors.MenuHighlight;
       this.pnlTitulo.Controls.Add(this.label1);
+      this.pnlTitulo.Controls.Add(this.label2);
       this.pnlTitulo.Controls.Add(this.pictureBox2);
       this.pnlTitulo.Controls.Add(this.btnMinWin);
       this.pnlTitulo.Controls.Add(this.btnMinimizar);
@@ -82,15 +84,31 @@
       // label1
       // 
       this.label1.AutoSize = true;
+      this.label1.BackColor = System.Drawing.Color.Transparent;
       this.label1.Cursor = System.Windows.Forms.Cursors.AppStarting;
-      this.label1.Font = new System.Drawing.Font("Rockwell", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(32, 7);
+      this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(57)))), ((int)(((byte)(84)))));
+      this.label1.Location = new System.Drawing.Point(63, 9);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(96, 21);
+      this.label1.Size = new System.Drawing.Size(65, 21);
       this.label1.TabIndex = 5;
-      this.label1.Text = "SysPharm";
-      this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.label1.Text = "Pharm";
+      this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.label1.Click += new System.EventHandler(this.label1_Click);
+      // 
+      // label2
+      // 
+      this.label2.AutoSize = true;
+      this.label2.BackColor = System.Drawing.Color.Transparent;
+      this.label2.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+      this.label2.Location = new System.Drawing.Point(35, 9);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(34, 21);
+      this.label2.TabIndex = 6;
+      this.label2.Text = "Sys";
+      this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
       // pictureBox2
       // 
@@ -175,6 +193,7 @@
       this.pnlNav.Controls.Add(this.btnUsuarios);
       this.pnlNav.Controls.Add(this.pictureBox1);
       this.pnlNav.Dock = System.Windows.Forms.DockStyle.Left;
+      this.pnlNav.Font = new System.Drawing.Font("Berlin Sans FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.pnlNav.Location = new System.Drawing.Point(0, 35);
       this.pnlNav.Name = "pnlNav";
       this.pnlNav.Size = new System.Drawing.Size(220, 615);
@@ -183,7 +202,7 @@
       // panel7
       // 
       this.panel7.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel7.Location = new System.Drawing.Point(0, 441);
+      this.panel7.Location = new System.Drawing.Point(0, 496);
       this.panel7.Name = "panel7";
       this.panel7.Size = new System.Drawing.Size(10, 35);
       this.panel7.TabIndex = 9;
@@ -191,7 +210,7 @@
       // panel6
       // 
       this.panel6.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel6.Location = new System.Drawing.Point(0, 400);
+      this.panel6.Location = new System.Drawing.Point(0, 455);
       this.panel6.Name = "panel6";
       this.panel6.Size = new System.Drawing.Size(10, 35);
       this.panel6.TabIndex = 9;
@@ -201,10 +220,10 @@
       this.btnFormula.FlatAppearance.BorderSize = 0;
       this.btnFormula.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnFormula.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnFormula.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnFormula.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnFormula.Image = ((System.Drawing.Image)(resources.GetObject("btnFormula.Image")));
       this.btnFormula.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnFormula.Location = new System.Drawing.Point(4, 441);
+      this.btnFormula.Location = new System.Drawing.Point(4, 496);
       this.btnFormula.Name = "btnFormula";
       this.btnFormula.Size = new System.Drawing.Size(213, 35);
       this.btnFormula.TabIndex = 10;
@@ -217,10 +236,10 @@
       this.btnPedidos.FlatAppearance.BorderSize = 0;
       this.btnPedidos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnPedidos.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnPedidos.Image = ((System.Drawing.Image)(resources.GetObject("btnPedidos.Image")));
       this.btnPedidos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnPedidos.Location = new System.Drawing.Point(4, 400);
+      this.btnPedidos.Location = new System.Drawing.Point(4, 455);
       this.btnPedidos.Name = "btnPedidos";
       this.btnPedidos.Size = new System.Drawing.Size(213, 35);
       this.btnPedidos.TabIndex = 10;
@@ -231,7 +250,7 @@
       // panel5
       // 
       this.panel5.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel5.Location = new System.Drawing.Point(0, 359);
+      this.panel5.Location = new System.Drawing.Point(0, 414);
       this.panel5.Name = "panel5";
       this.panel5.Size = new System.Drawing.Size(10, 35);
       this.panel5.TabIndex = 7;
@@ -241,10 +260,10 @@
       this.btnServicio.FlatAppearance.BorderSize = 0;
       this.btnServicio.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnServicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnServicio.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnServicio.Image = ((System.Drawing.Image)(resources.GetObject("btnServicio.Image")));
       this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnServicio.Location = new System.Drawing.Point(4, 359);
+      this.btnServicio.Location = new System.Drawing.Point(4, 414);
       this.btnServicio.Name = "btnServicio";
       this.btnServicio.Size = new System.Drawing.Size(213, 35);
       this.btnServicio.TabIndex = 8;
@@ -255,7 +274,7 @@
       // panel4
       // 
       this.panel4.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel4.Location = new System.Drawing.Point(0, 318);
+      this.panel4.Location = new System.Drawing.Point(0, 373);
       this.panel4.Name = "panel4";
       this.panel4.Size = new System.Drawing.Size(10, 35);
       this.panel4.TabIndex = 5;
@@ -265,10 +284,10 @@
       this.btnEPS.FlatAppearance.BorderSize = 0;
       this.btnEPS.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnEPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnEPS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnEPS.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnEPS.Image = ((System.Drawing.Image)(resources.GetObject("btnEPS.Image")));
       this.btnEPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnEPS.Location = new System.Drawing.Point(4, 318);
+      this.btnEPS.Location = new System.Drawing.Point(4, 373);
       this.btnEPS.Name = "btnEPS";
       this.btnEPS.Size = new System.Drawing.Size(213, 35);
       this.btnEPS.TabIndex = 6;
@@ -279,7 +298,7 @@
       // panel3
       // 
       this.panel3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel3.Location = new System.Drawing.Point(0, 277);
+      this.panel3.Location = new System.Drawing.Point(0, 332);
       this.panel3.Name = "panel3";
       this.panel3.Size = new System.Drawing.Size(10, 35);
       this.panel3.TabIndex = 3;
@@ -289,10 +308,10 @@
       this.btnInformes.FlatAppearance.BorderSize = 0;
       this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnInformes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnInformes.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
       this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnInformes.Location = new System.Drawing.Point(4, 277);
+      this.btnInformes.Location = new System.Drawing.Point(4, 332);
       this.btnInformes.Name = "btnInformes";
       this.btnInformes.Size = new System.Drawing.Size(213, 35);
       this.btnInformes.TabIndex = 4;
@@ -303,7 +322,7 @@
       // panel2
       // 
       this.panel2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel2.Location = new System.Drawing.Point(0, 236);
+      this.panel2.Location = new System.Drawing.Point(0, 291);
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(10, 35);
       this.panel2.TabIndex = 1;
@@ -313,10 +332,10 @@
       this.btnMedicamentos.FlatAppearance.BorderSize = 0;
       this.btnMedicamentos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnMedicamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnMedicamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnMedicamentos.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnMedicamentos.Image = ((System.Drawing.Image)(resources.GetObject("btnMedicamentos.Image")));
       this.btnMedicamentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnMedicamentos.Location = new System.Drawing.Point(4, 236);
+      this.btnMedicamentos.Location = new System.Drawing.Point(4, 291);
       this.btnMedicamentos.Name = "btnMedicamentos";
       this.btnMedicamentos.Size = new System.Drawing.Size(213, 35);
       this.btnMedicamentos.TabIndex = 2;
@@ -327,7 +346,7 @@
       // panel1
       // 
       this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      this.panel1.Location = new System.Drawing.Point(0, 195);
+      this.panel1.Location = new System.Drawing.Point(0, 250);
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(10, 35);
       this.panel1.TabIndex = 0;
@@ -337,10 +356,10 @@
       this.btnUsuarios.FlatAppearance.BorderSize = 0;
       this.btnUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
       this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnUsuarios.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
       this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnUsuarios.Location = new System.Drawing.Point(4, 195);
+      this.btnUsuarios.Location = new System.Drawing.Point(4, 250);
       this.btnUsuarios.Name = "btnUsuarios";
       this.btnUsuarios.Size = new System.Drawing.Size(213, 35);
       this.btnUsuarios.TabIndex = 0;
@@ -351,7 +370,7 @@
       // pictureBox1
       // 
       this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-      this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+      this.pictureBox1.Location = new System.Drawing.Point(4, 62);
       this.pictureBox1.Name = "pictureBox1";
       this.pictureBox1.Size = new System.Drawing.Size(213, 115);
       this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -417,5 +436,6 @@
     private System.Windows.Forms.Panel panel6;
     private System.Windows.Forms.Button btnFormula;
     private System.Windows.Forms.Button btnPedidos;
+    private System.Windows.Forms.Label label2;
   }
 }

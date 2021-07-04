@@ -30,6 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormServicio));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabEps = new System.Windows.Forms.TabControl();
       this.tabAddSer = new System.Windows.Forms.TabPage();
       this.btnCancel = new System.Windows.Forms.Button();
@@ -40,11 +41,11 @@
       this.txtNomSer = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.label11 = new System.Windows.Forms.Label();
+      this.txtBuscar = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.listSer = new System.Windows.Forms.DataGridView();
       this.errNom = new System.Windows.Forms.ErrorProvider(this.components);
-      this.label11 = new System.Windows.Forms.Label();
-      this.txtBuscar = new System.Windows.Forms.TextBox();
       this.tabEps.SuspendLayout();
       this.tabAddSer.SuspendLayout();
       this.tabPage2.SuspendLayout();
@@ -57,7 +58,7 @@
       this.tabEps.Controls.Add(this.tabAddSer);
       this.tabEps.Controls.Add(this.tabPage2);
       this.tabEps.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabEps.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tabEps.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabEps.Location = new System.Drawing.Point(0, 0);
       this.tabEps.Name = "tabEps";
       this.tabEps.SelectedIndex = 0;
@@ -75,10 +76,10 @@
       this.tabAddSer.Controls.Add(this.txtNomSer);
       this.tabAddSer.Controls.Add(this.label1);
       this.tabAddSer.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.tabAddSer.Location = new System.Drawing.Point(4, 27);
+      this.tabAddSer.Location = new System.Drawing.Point(4, 26);
       this.tabAddSer.Name = "tabAddSer";
       this.tabAddSer.Padding = new System.Windows.Forms.Padding(3);
-      this.tabAddSer.Size = new System.Drawing.Size(792, 419);
+      this.tabAddSer.Size = new System.Drawing.Size(792, 420);
       this.tabAddSer.TabIndex = 0;
       this.tabAddSer.Text = "Agregar Servicio";
       // 
@@ -165,7 +166,7 @@
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(111, 116);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(142, 18);
+      this.label1.Size = new System.Drawing.Size(131, 17);
       this.label1.TabIndex = 0;
       this.label1.Text = "Nombre del Servicio";
       // 
@@ -176,49 +177,19 @@
       this.tabPage2.Controls.Add(this.txtBuscar);
       this.tabPage2.Controls.Add(this.label7);
       this.tabPage2.Controls.Add(this.listSer);
-      this.tabPage2.Location = new System.Drawing.Point(4, 27);
+      this.tabPage2.Location = new System.Drawing.Point(4, 26);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(792, 419);
+      this.tabPage2.Size = new System.Drawing.Size(792, 420);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Lista de Servicios";
-      // 
-      // label7
-      // 
-      this.label7.AutoSize = true;
-      this.label7.BackColor = System.Drawing.Color.SkyBlue;
-      this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-      this.label7.Location = new System.Drawing.Point(3, 3);
-      this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(727, 18);
-      this.label7.TabIndex = 3;
-      this.label7.Text = "Sí desea modificar o eliminar un Servicio, debes dar doble clic sobre el Servicio" +
-    " al que deseas hacer la acción";
-      // 
-      // listSer
-      // 
-      this.listSer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.listSer.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listSer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.listSer.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listSer.Location = new System.Drawing.Point(3, 54);
-      this.listSer.Name = "listSer";
-      this.listSer.Size = new System.Drawing.Size(786, 362);
-      this.listSer.TabIndex = 2;
-      this.listSer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
-      // 
-      // errNom
-      // 
-      this.errNom.ContainerControl = this;
       // 
       // label11
       // 
       this.label11.AutoSize = true;
       this.label11.Location = new System.Drawing.Point(4, 25);
       this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(72, 18);
+      this.label11.Size = new System.Drawing.Size(64, 17);
       this.label11.TabIndex = 7;
       this.label11.Text = "Buscador";
       // 
@@ -229,6 +200,45 @@
       this.txtBuscar.Size = new System.Drawing.Size(365, 24);
       this.txtBuscar.TabIndex = 6;
       this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.BackColor = System.Drawing.Color.SkyBlue;
+      this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+      this.label7.Location = new System.Drawing.Point(3, 3);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(658, 17);
+      this.label7.TabIndex = 3;
+      this.label7.Text = "Sí desea modificar o eliminar un Servicio, debes dar doble clic sobre el Servicio" +
+    " al que deseas hacer la acción";
+      // 
+      // listSer
+      // 
+      this.listSer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.listSer.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listSer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      this.listSer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.listSer.EnableHeadersVisualStyles = false;
+      this.listSer.GridColor = System.Drawing.SystemColors.ControlLightLight;
+      this.listSer.Location = new System.Drawing.Point(3, 54);
+      this.listSer.Name = "listSer";
+      this.listSer.Size = new System.Drawing.Size(786, 363);
+      this.listSer.TabIndex = 2;
+      this.listSer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
+      // 
+      // errNom
+      // 
+      this.errNom.ContainerControl = this;
       // 
       // FormServicio
       // 

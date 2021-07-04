@@ -21,15 +21,6 @@ namespace SysPharm.Controllers
       _context = context;
     }
 
-    public bool Login(string password)
-    {
-      var ingreso = _context.Ingresos.Where(x => x.Password == password && x.IsActive).FirstOrDefault();
-      if (ingreso != null)
-        return true;
-      else
-        return false;
-    }
-
     public ResponseViewModel RegisterMedicamento(Medicamento medicamento)
     {
       var response = new ResponseViewModel();
@@ -47,6 +38,26 @@ namespace SysPharm.Controllers
         response.Mensaje = e.Message;
       }
       return response;
+    }
+
+    public Medicamento GetMedicamento(int id)
+    {
+      var medicamento = _context.Medicamentos.Where(x => x.Id == id).FirstOrDefault();
+      if (medicamento == null)
+      {
+        return null;
+      }
+      return medicamento;
+    }
+
+    public Medicamento GetMedicamento(string nombre)
+    {
+      var medicamento = _context.Medicamentos.Where(x => x.Nombre.Trim().ToLower() == nombre.Trim().ToLower()).FirstOrDefault();
+      if (medicamento == null)
+      {
+        return null;
+      }
+      return medicamento;
     }
 
     public ResponseViewModel UpdateMedicamento(Medicamento medicamento)

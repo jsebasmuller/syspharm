@@ -16,7 +16,9 @@ namespace SysPharm.Models
     public string IdFormula { get; set; }
     [ForeignKey("Medicamento")]
     public int IdMedicamento { get; set; }
+    public int CantidadFormula { get; set; }
     public int Cantidad { get; set; }
+    public int CantidadPendiente { get; set; }
     public double PrecioCompra { get; set; }
     public double PrecioVenta { get; set; }
 

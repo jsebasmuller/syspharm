@@ -67,7 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FormulaController.cs" />
     <Compile Include="Controllers\MedicamentoController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\EPSController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -76,10 +78,21 @@
     <Compile Include="Migrations\202107020130566_init.designer.cs">
       <DependentUpon>202107020130566_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107040145523_AddCantidadFormula.cs" />
+    <Compile Include="Migrations\202107040145523_AddCantidadFormula.designer.cs">
+      <DependentUpon>202107040145523_AddCantidadFormula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107040200551_AddCantidadPendiente.cs" />
+    <Compile Include="Migrations\202107040200551_AddCantidadPendiente.designer.cs">
+      <DependentUpon>202107040200551_AddCantidadPendiente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DetalleFormula.cs" />
     <Compile Include="Models\Ingreso.cs" />
     <Compile Include="Models\DetallePedido.cs" />
+    <Compile Include="Models\ViewModel\FormulaViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetalleFormulaViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetallePedidoViewModel.cs" />
     <Compile Include="Models\ViewModel\PacienteViewModel.cs" />
     <Compile Include="Models\ViewModel\ResponseViewModel.cs" />
     <Compile Include="Views\FormEPS.cs">
@@ -148,6 +161,12 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202107020130566_init.resx">
       <DependentUpon>202107020130566_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107040145523_AddCantidadFormula.resx">
+      <DependentUpon>202107040145523_AddCantidadFormula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107040200551_AddCantidadPendiente.resx">
+      <DependentUpon>202107040200551_AddCantidadPendiente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

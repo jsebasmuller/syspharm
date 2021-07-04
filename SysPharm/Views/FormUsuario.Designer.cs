@@ -30,6 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUsuario));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabUser = new System.Windows.Forms.TabControl();
       this.tabAddUser = new System.Windows.Forms.TabPage();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -98,7 +100,7 @@
       this.tabUser.Controls.Add(this.tabListUsers);
       this.tabUser.Controls.Add(this.tabPage1);
       this.tabUser.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tabUser.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabUser.Location = new System.Drawing.Point(0, 0);
       this.tabUser.Name = "tabUser";
       this.tabUser.SelectedIndex = 0;
@@ -108,10 +110,10 @@
       // tabAddUser
       // 
       this.tabAddUser.Controls.Add(this.groupBox1);
-      this.tabAddUser.Location = new System.Drawing.Point(4, 27);
+      this.tabAddUser.Location = new System.Drawing.Point(4, 26);
       this.tabAddUser.Name = "tabAddUser";
       this.tabAddUser.Padding = new System.Windows.Forms.Padding(3);
-      this.tabAddUser.Size = new System.Drawing.Size(792, 419);
+      this.tabAddUser.Size = new System.Drawing.Size(792, 420);
       this.tabAddUser.TabIndex = 0;
       this.tabAddUser.Text = "Agregar Usuario";
       this.tabAddUser.UseVisualStyleBackColor = true;
@@ -142,7 +144,7 @@
       this.groupBox1.Controls.Add(this.txtDireccion);
       this.groupBox1.Location = new System.Drawing.Point(8, 6);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(776, 410);
+      this.groupBox1.Size = new System.Drawing.Size(776, 411);
       this.groupBox1.TabIndex = 14;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Datos del Usuario";
@@ -152,7 +154,7 @@
       this.cmbEps.FormattingEnabled = true;
       this.cmbEps.Location = new System.Drawing.Point(540, 163);
       this.cmbEps.Name = "cmbEps";
-      this.cmbEps.Size = new System.Drawing.Size(200, 26);
+      this.cmbEps.Size = new System.Drawing.Size(200, 25);
       this.cmbEps.TabIndex = 18;
       // 
       // label9
@@ -160,7 +162,7 @@
       this.label9.AutoSize = true;
       this.label9.Location = new System.Drawing.Point(432, 166);
       this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(38, 18);
+      this.label9.Size = new System.Drawing.Size(32, 17);
       this.label9.TabIndex = 17;
       this.label9.Text = "EPS";
       // 
@@ -240,7 +242,7 @@
       this.cmbTDoc.FormattingEnabled = true;
       this.cmbTDoc.Location = new System.Drawing.Point(197, 49);
       this.cmbTDoc.Name = "cmbTDoc";
-      this.cmbTDoc.Size = new System.Drawing.Size(200, 26);
+      this.cmbTDoc.Size = new System.Drawing.Size(200, 25);
       this.cmbTDoc.TabIndex = 1;
       this.cmbTDoc.SelectedValueChanged += new System.EventHandler(this.ValidarTipoDocumento);
       // 
@@ -249,7 +251,7 @@
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(34, 52);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(139, 18);
+      this.label1.Size = new System.Drawing.Size(131, 17);
       this.label1.TabIndex = 0;
       this.label1.Text = "Tipo de Documento";
       // 
@@ -258,7 +260,7 @@
       this.label2.AutoSize = true;
       this.label2.Location = new System.Drawing.Point(432, 52);
       this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(86, 18);
+      this.label2.Size = new System.Drawing.Size(81, 17);
       this.label2.TabIndex = 2;
       this.label2.Text = "Documento";
       // 
@@ -283,7 +285,7 @@
       this.label5.AutoSize = true;
       this.label5.Location = new System.Drawing.Point(432, 221);
       this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(66, 18);
+      this.label5.Size = new System.Drawing.Size(61, 17);
       this.label5.TabIndex = 10;
       this.label5.Text = "Teléfono";
       // 
@@ -292,7 +294,7 @@
       this.label3.AutoSize = true;
       this.label3.Location = new System.Drawing.Point(34, 111);
       this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(144, 18);
+      this.label3.Size = new System.Drawing.Size(133, 17);
       this.label3.TabIndex = 4;
       this.label3.Text = "Nombres y Apellidos";
       // 
@@ -301,7 +303,7 @@
       this.cmbTUsu.FormattingEnabled = true;
       this.cmbTUsu.Location = new System.Drawing.Point(197, 218);
       this.cmbTUsu.Name = "cmbTUsu";
-      this.cmbTUsu.Size = new System.Drawing.Size(200, 26);
+      this.cmbTUsu.Size = new System.Drawing.Size(200, 25);
       this.cmbTUsu.TabIndex = 9;
       this.cmbTUsu.SelectedValueChanged += new System.EventHandler(this.ValidarTipoUsuario);
       // 
@@ -318,7 +320,7 @@
       this.label6.AutoSize = true;
       this.label6.Location = new System.Drawing.Point(34, 221);
       this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(113, 18);
+      this.label6.Size = new System.Drawing.Size(104, 17);
       this.label6.TabIndex = 8;
       this.label6.Text = "Tipo de Usuario";
       // 
@@ -327,7 +329,7 @@
       this.label4.AutoSize = true;
       this.label4.Location = new System.Drawing.Point(34, 166);
       this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(71, 18);
+      this.label4.Size = new System.Drawing.Size(64, 17);
       this.label4.TabIndex = 6;
       this.label4.Text = "Dirección";
       // 
@@ -343,10 +345,10 @@
       // 
       this.tabBulkLoad.Controls.Add(this.btnDown);
       this.tabBulkLoad.Controls.Add(this.btnLoad);
-      this.tabBulkLoad.Location = new System.Drawing.Point(4, 27);
+      this.tabBulkLoad.Location = new System.Drawing.Point(4, 26);
       this.tabBulkLoad.Name = "tabBulkLoad";
       this.tabBulkLoad.Padding = new System.Windows.Forms.Padding(3);
-      this.tabBulkLoad.Size = new System.Drawing.Size(792, 419);
+      this.tabBulkLoad.Size = new System.Drawing.Size(792, 420);
       this.tabBulkLoad.TabIndex = 1;
       this.tabBulkLoad.Text = "Cargue Masivo";
       this.tabBulkLoad.UseVisualStyleBackColor = true;
@@ -385,10 +387,10 @@
       this.tabListUsers.Controls.Add(this.txtBuscarPac);
       this.tabListUsers.Controls.Add(this.label7);
       this.tabListUsers.Controls.Add(this.listUsuarios);
-      this.tabListUsers.Location = new System.Drawing.Point(4, 27);
+      this.tabListUsers.Location = new System.Drawing.Point(4, 26);
       this.tabListUsers.Name = "tabListUsers";
       this.tabListUsers.Padding = new System.Windows.Forms.Padding(3);
-      this.tabListUsers.Size = new System.Drawing.Size(792, 419);
+      this.tabListUsers.Size = new System.Drawing.Size(792, 420);
       this.tabListUsers.TabIndex = 2;
       this.tabListUsers.Text = "Lista de Pacientes";
       this.tabListUsers.UseVisualStyleBackColor = true;
@@ -398,7 +400,7 @@
       this.label10.AutoSize = true;
       this.label10.Location = new System.Drawing.Point(4, 25);
       this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(72, 18);
+      this.label10.Size = new System.Drawing.Size(64, 17);
       this.label10.TabIndex = 3;
       this.label10.Text = "Buscador";
       // 
@@ -417,7 +419,7 @@
       this.label7.Dock = System.Windows.Forms.DockStyle.Top;
       this.label7.Location = new System.Drawing.Point(3, 3);
       this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(719, 18);
+      this.label7.Size = new System.Drawing.Size(656, 17);
       this.label7.TabIndex = 1;
       this.label7.Text = "Sí desea modificar o eliminar un usuario, debes dar doble clic sobre el usuario a" +
     "l que deseas hacer la acción";
@@ -428,11 +430,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.listUsuarios.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.listUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.listUsuarios.EnableHeadersVisualStyles = false;
       this.listUsuarios.GridColor = System.Drawing.SystemColors.ControlLightLight;
       this.listUsuarios.Location = new System.Drawing.Point(3, 54);
       this.listUsuarios.Name = "listUsuarios";
-      this.listUsuarios.Size = new System.Drawing.Size(786, 362);
+      this.listUsuarios.Size = new System.Drawing.Size(786, 363);
       this.listUsuarios.TabIndex = 0;
       this.listUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
@@ -443,10 +454,10 @@
       this.tabPage1.Controls.Add(this.txtBuscarMed);
       this.tabPage1.Controls.Add(this.label8);
       this.tabPage1.Controls.Add(this.listMedicos);
-      this.tabPage1.Location = new System.Drawing.Point(4, 27);
+      this.tabPage1.Location = new System.Drawing.Point(4, 26);
       this.tabPage1.Name = "tabPage1";
       this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(792, 419);
+      this.tabPage1.Size = new System.Drawing.Size(792, 420);
       this.tabPage1.TabIndex = 3;
       this.tabPage1.Text = "Lista de Medicos";
       // 
@@ -455,7 +466,7 @@
       this.label11.AutoSize = true;
       this.label11.Location = new System.Drawing.Point(4, 25);
       this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(72, 18);
+      this.label11.Size = new System.Drawing.Size(64, 17);
       this.label11.TabIndex = 5;
       this.label11.Text = "Buscador";
       // 
@@ -474,7 +485,7 @@
       this.label8.Dock = System.Windows.Forms.DockStyle.Top;
       this.label8.Location = new System.Drawing.Point(3, 3);
       this.label8.Name = "label8";
-      this.label8.Size = new System.Drawing.Size(719, 18);
+      this.label8.Size = new System.Drawing.Size(656, 17);
       this.label8.TabIndex = 2;
       this.label8.Text = "Sí desea modificar o eliminar un usuario, debes dar doble clic sobre el usuario a" +
     "l que deseas hacer la acción";
@@ -485,11 +496,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.listMedicos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listMedicos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
       this.listMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.listMedicos.EnableHeadersVisualStyles = false;
       this.listMedicos.GridColor = System.Drawing.SystemColors.ControlLightLight;
       this.listMedicos.Location = new System.Drawing.Point(3, 54);
       this.listMedicos.Name = "listMedicos";
-      this.listMedicos.Size = new System.Drawing.Size(786, 362);
+      this.listMedicos.Size = new System.Drawing.Size(786, 363);
       this.listMedicos.TabIndex = 1;
       this.listMedicos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTableMedico);
       // 

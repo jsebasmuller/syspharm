@@ -22,6 +22,9 @@ namespace SysPharm.Models
     public DbSet<Servicio> Servicios { get; set; }
     public DbSet<TipoDocumento> TiposDocumento { get; set; }
     public DbSet<Ingreso> Ingresos { get; set; }
+    public DbSet<InventarioFinMes> InventariosFinMes { get; set; }
+    public DbSet<Arqueo> Arqueos { get; set; }
+    public DbSet<MedicamentoVencido> MedicamentosVendicos { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {

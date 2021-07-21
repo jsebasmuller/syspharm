@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PagedList;
 using System.Windows.Forms;
 
 namespace SysPharm.Controllers
@@ -113,9 +114,93 @@ namespace SysPharm.Controllers
       return response;
     }
 
+    public IPagedList<Medicamento> GetMedicamentosPag(int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Medicamentos.OrderBy(x => x.Nombre).ToPagedList(pageNumber, 13);
+    }
+
+    public IPagedList<Medicamento> BuscadorPag(string txtBuscar, int pagina)
+    {
+      var lista = _context.Medicamentos.Where(x => x.Cantidad.ToString().Contains(txtBuscar.Trim()) ||
+                                            x.Nombre.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.VlrCompra.ToString().Trim().Contains(txtBuscar.Trim()) ||
+                                            x.VlrVenta.ToString().Trim().ToLower().Contains(txtBuscar.Trim().ToLower())).OrderBy(x => x.Nombre).ToPagedList(pagina, 13);
+      return lista;
+    }
+
     public List<Medicamento> GetMedicamentos()
     {
-      return _context.Medicamentos.ToList();
+      return _context.Medicamentos.OrderBy(x => x.Nombre).ToList();
+    }
+
+    public ResponseViewModel RegisterMedicamentoVencido(List<MedicamentoVencido> listMedVen)
+    {
+      var response = new ResponseViewModel();
+      try
+      {
+        int count = 0;
+        foreach (var medVen in listMedVen)
+        {
+          _context.MedicamentosVendicos.Add(medVen);
+          var medicamento = _context.Medicamentos.Where(x => x.Id == medVen.IdMedicamento).FirstOrDefault();
+          medicamento.Cantidad = medicamento.Cantidad - medVen.Cantidad;
+          if (count == 100)
+          {
+            _context.SaveChanges();
+            count = 0;
+          }
+          count++;
+        }
+        _context.SaveChanges();
+        response.Respuesta = true;
+        response.Mensaje = "Medicamentos vencidos registrados con exito";
+      }
+      catch (Exception e)
+      {
+        response.Respuesta = false;
+        response.Mensaje = e.Message;
+        return response;
+      }
+      return response;
+    }
+
+    public ResponseViewModel Arqueo(List<ArqueoViewModel> lista)
+    {
+      ResponseViewModel response = new ResponseViewModel();
+      try
+      {
+        int count = 0;
+        foreach(var arqueo in lista)
+        {
+          var medicamento = _context.Medicamentos.Where(x => x.Nombre == arqueo.Medicamento).FirstOrDefault();
+          Arqueo arq = new Arqueo();
+          arq.IdMedicamento = medicamento.Id;
+          arq.ValorCompra = medicamento.VlrCompra;
+          arq.ValorVenta = medicamento.VlrVenta;
+          arq.CantidadFisica = arqueo.CantidadFisico;
+          arq.CantidadSistema = arqueo.CantidadInventario;
+          arq.FechaArqueo = DateTime.Now;
+          medicamento.Cantidad = arq.CantidadFisica;
+          _context.Arqueos.Add(arq);
+          if (count == 100)
+          {
+            _context.SaveChanges();
+            count = 0;
+          }
+          count++;
+        }
+        _context.SaveChanges();
+        response.Respuesta = true;
+        response.Mensaje = "Arqueo de inventario ajustado correctamente";
+      }
+      catch (Exception e)
+      {
+        response.Respuesta = false;
+        response.Mensaje = e.Message;
+        return response;
+      }
+      return response;
     }
 
     public ResponseViewModel DescargarPlantilla(string path)
@@ -134,6 +219,37 @@ namespace SysPharm.Controllers
         return response;
       }
       return response;
+    }
+
+    public bool InventarioFinMes()
+    {
+      try
+      {
+        var medicamentos = _context.Medicamentos.Select(x => new InventarioFinMes()
+        {
+          Cantidad = x.Cantidad,
+          IdMedicamento = x.Id,
+          ValorCompra = x.VlrCompra,
+          Fecha = DateTime.Now
+        }).ToList();
+        int count = 0;
+        foreach(var inventario in medicamentos)
+        {
+          _context.InventariosFinMes.Add(inventario);
+          if(count == 100)
+          {
+            _context.SaveChanges();
+            count = 0;
+          }
+          count++;
+        }
+        _context.SaveChanges();
+        return true;
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
     }
 
     private string ValidateMedicamentos(string path)
@@ -215,13 +331,13 @@ namespace SysPharm.Controllers
           _context.Medicamentos.Add(medicamento);
           if (count == 100)
           {
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             count = 0;
           }
           row++;
           count++;
         }
-        _context.SaveChangesAsync();
+        _context.SaveChanges();
         response.Respuesta = true;
         response.Mensaje = "La carga masiva ha sido registrada correctamente";
       }

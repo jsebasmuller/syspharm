@@ -54,6 +54,9 @@
       this.label1 = new System.Windows.Forms.Label();
       this.cmbMedicamentos = new System.Windows.Forms.ComboBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.lblPag = new System.Windows.Forms.Label();
+      this.btnNext = new System.Windows.Forms.Button();
+      this.btnPrev = new System.Windows.Forms.Button();
       this.label10 = new System.Windows.Forms.Label();
       this.txtBuscar = new System.Windows.Forms.TextBox();
       this.listFormulas = new System.Windows.Forms.DataGridView();
@@ -221,6 +224,7 @@
       this.listDetalles.Name = "listDetalles";
       this.listDetalles.Size = new System.Drawing.Size(727, 167);
       this.listDetalles.TabIndex = 21;
+      this.listDetalles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTable);
       this.listDetalles.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.listDetalles_CellEndEdit);
       // 
       // btnLimpiar
@@ -283,6 +287,7 @@
       // dtDespacho
       // 
       this.dtDespacho.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.dtDespacho.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
       this.dtDespacho.Location = new System.Drawing.Point(547, 78);
       this.dtDespacho.Margin = new System.Windows.Forms.Padding(4);
       this.dtDespacho.Name = "dtDespacho";
@@ -304,6 +309,7 @@
       // dtFormula
       // 
       this.dtFormula.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.dtFormula.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
       this.dtFormula.Location = new System.Drawing.Point(179, 78);
       this.dtFormula.Margin = new System.Windows.Forms.Padding(4);
       this.dtFormula.Name = "dtFormula";
@@ -345,6 +351,9 @@
       // tabPage2
       // 
       this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage2.Controls.Add(this.lblPag);
+      this.tabPage2.Controls.Add(this.btnNext);
+      this.tabPage2.Controls.Add(this.btnPrev);
       this.tabPage2.Controls.Add(this.label10);
       this.tabPage2.Controls.Add(this.txtBuscar);
       this.tabPage2.Controls.Add(this.listFormulas);
@@ -355,6 +364,40 @@
       this.tabPage2.Size = new System.Drawing.Size(792, 420);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Lista de Formulas";
+      // 
+      // lblPag
+      // 
+      this.lblPag.AutoSize = true;
+      this.lblPag.Cursor = System.Windows.Forms.Cursors.HSplit;
+      this.lblPag.Location = new System.Drawing.Point(365, 389);
+      this.lblPag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblPag.Name = "lblPag";
+      this.lblPag.Size = new System.Drawing.Size(64, 17);
+      this.lblPag.TabIndex = 11;
+      this.lblPag.Text = "Buscador";
+      // 
+      // btnNext
+      // 
+      this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNext.Location = new System.Drawing.Point(474, 386);
+      this.btnNext.Name = "btnNext";
+      this.btnNext.Size = new System.Drawing.Size(25, 23);
+      this.btnNext.TabIndex = 13;
+      this.btnNext.Text = ">";
+      this.btnNext.UseVisualStyleBackColor = true;
+      this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+      // 
+      // btnPrev
+      // 
+      this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPrev.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnPrev.Location = new System.Drawing.Point(320, 386);
+      this.btnPrev.Name = "btnPrev";
+      this.btnPrev.Size = new System.Drawing.Size(25, 23);
+      this.btnPrev.TabIndex = 12;
+      this.btnPrev.Text = "<";
+      this.btnPrev.UseVisualStyleBackColor = true;
+      this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
       // 
       // label10
       // 
@@ -373,6 +416,7 @@
       this.txtBuscar.Name = "txtBuscar";
       this.txtBuscar.Size = new System.Drawing.Size(485, 24);
       this.txtBuscar.TabIndex = 4;
+      this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
       // 
       // listFormulas
       // 
@@ -390,7 +434,7 @@
       this.listFormulas.Location = new System.Drawing.Point(8, 42);
       this.listFormulas.Margin = new System.Windows.Forms.Padding(4);
       this.listFormulas.Name = "listFormulas";
-      this.listFormulas.Size = new System.Drawing.Size(775, 369);
+      this.listFormulas.Size = new System.Drawing.Size(775, 337);
       this.listFormulas.TabIndex = 0;
       // 
       // errServ
@@ -485,5 +529,8 @@
     private System.Windows.Forms.ErrorProvider errFecD;
     private System.Windows.Forms.ErrorProvider errMedicamento;
     private System.Windows.Forms.ErrorProvider errDetalle;
+    private System.Windows.Forms.Label lblPag;
+    private System.Windows.Forms.Button btnNext;
+    private System.Windows.Forms.Button btnPrev;
   }
 }

@@ -1,4 +1,5 @@
-﻿using SysPharm.Models;
+﻿using PagedList;
+using SysPharm.Models;
 using SysPharm.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,22 @@ namespace SysPharm.Controllers
     public List<Pedido> GetPedidos()
     {
       return _context.Pedidos.OrderByDescending(x => x.Id).ToList();
+    }
+
+    public IPagedList<Pedido> GetPedidosPag(int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Pedidos.OrderByDescending(x => x.Id).ToPagedList(pageNumber, 13);
+    }
+
+    public IPagedList<Pedido> BuscadorPag(string txtBuscar, int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Pedidos.Where(x => x.Id.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.Proveedor.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.VlrTotal.ToString().Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.FechaIngreso.ToString().Trim().Contains(txtBuscar.Trim()) ||
+                                            x.FechaPedido.ToString().Trim().ToLower().Contains(txtBuscar.Trim().ToLower())).OrderByDescending(x => x.Id).ToPagedList(pageNumber, 13);
     }
 
     public string GetNextId(DateTime fechaAct)

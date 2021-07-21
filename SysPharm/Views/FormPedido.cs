@@ -1,4 +1,5 @@
-﻿using SysPharm.Controllers;
+﻿using PagedList;
+using SysPharm.Controllers;
 using SysPharm.Models;
 using SysPharm.Models.ViewModel;
 using System;
@@ -17,9 +18,10 @@ namespace SysPharm.Views
 {
   public partial class FormPedido : Form
   {
+    int pagina = 1;
     MedicamentoController medControl = new MedicamentoController(new Context());
     PedidoController pedControl = new PedidoController(new Context());
-    List<Pedido> listaPedidos = new List<Pedido>();
+    IPagedList<Pedido> listaPedidos;
     private BindingList<DetallePedidoViewModel> listaDetalle = new BindingList<DetallePedidoViewModel>();
     List<Medicamento> listaMedicamentos = new List<Medicamento>();
     bool valMed = false;
@@ -30,6 +32,14 @@ namespace SysPharm.Views
     {
       Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES");
       InitializeComponent();
+      dtIngreso.Format = DateTimePickerFormat.Custom;
+      dtIngreso.CustomFormat = "dd/MM/yyyy";
+      dtSolicitud.Format = DateTimePickerFormat.Custom;
+      dtSolicitud.CustomFormat = "dd/MM/yyyy";
+      dtIngreso.Format = DateTimePickerFormat.Custom;
+      dtIngreso.CustomFormat = "dd/MM/yyyy";
+      dtSolicitud.Format = DateTimePickerFormat.Custom;
+      dtSolicitud.CustomFormat = "dd/MM/yyyy";
       lblId.Text = pedControl.GetNextId(DateTime.Now);
       RefrescarListaPedidos();
       ObtenerMedicamentos();
@@ -52,18 +62,24 @@ namespace SysPharm.Views
       cmbMedicamentos.AutoCompleteSource = AutoCompleteSource.CustomSource;
     }
 
-    private void RefrescarListaPedidos()
+    private void RefrescarListaPedidos(int pagina = 1)
     {
-      listaPedidos = pedControl.GetPedidos();
+      int paginas = 0;
+      listaPedidos = pedControl.GetPedidosPag(pagina);
       if (!txtBuscar.Text.Trim().Equals(""))
       {
-        listaPedidos = listaPedidos.Where(x => x.Id.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())||
-                                            x.Proveedor.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) ||
-                                            x.VlrTotal.ToString().Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) ||
-                                            x.FechaIngreso.ToString().Trim().Contains(txtBuscar.Text.Trim()) ||
-                                            x.FechaPedido.ToString().Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())).ToList();
+        listaPedidos = pedControl.BuscadorPag(txtBuscar.Text, pagina);
       }
-      listPedidos.DataSource = listaPedidos;
+      if (pagina > listaPedidos.PageCount && listaPedidos.PageCount != 0)
+      {
+        paginas = 1;
+        pagina = paginas;
+        RefrescarListaPedidos(pagina);
+      }
+      listPedidos.DataSource = listaPedidos.ToList();
+      btnPrev.Enabled = listaPedidos.HasPreviousPage;
+      btnNext.Enabled = listaPedidos.HasNextPage;
+      lblPag.Text = string.Format("Página {0} de {1}", pagina, paginas == 0 ? 1 : paginas);
       listPedidos.AutoResizeColumns();
       listPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
     }
@@ -115,7 +131,7 @@ namespace SysPharm.Views
           if (result == System.Windows.Forms.DialogResult.OK)
           {
             lblId.Text = pedControl.GetNextId(pedido.FechaIngreso);
-            RefrescarListaPedidos();
+            RefrescarListaPedidos(pagina);
             btnLimpiar_Click(sender, e);
           }
         }
@@ -140,6 +156,9 @@ namespace SysPharm.Views
     private void btnLimpiar_Click(object sender, EventArgs e)
     {
       txtProveedor.Text = "";
+      valMed = false;
+      valPro = false;
+      valDetP = false;
       listDetalles.Rows.Clear();
     }
 
@@ -187,47 +206,33 @@ namespace SysPharm.Views
 
     private void validateDetallePedido(object sender, EventArgs e)
     {
-      foreach (DataGridViewRow row in listDetalles.Rows)
+      bool val = true;
+      if (listDetalles.Rows.Count > 1)
       {
-        if(listDetalles.Rows.Count == 1)
+        val = listDetalles.Rows.Cast<DataGridViewRow>().Any(x => x.Cells[0].Value != null && ((x.Cells[1].Value == null || string.IsNullOrWhiteSpace(x.Cells[1].Value.ToString())) || 
+                                                            (x.Cells[2].Value == null || string.IsNullOrWhiteSpace(x.Cells[2].Value.ToString())) || 
+                                                            (x.Cells[3].Value == null || string.IsNullOrWhiteSpace(x.Cells[3].Value.ToString())) ||
+                                                            (x.Cells[4].Value == null || x.Cells[4].Value.ToString() == "0") || (x.Cells[5].Value == null || x.Cells[5].Value.ToString() == "0")));
+      }
+      else
+      {
+        if (listDetalles.Rows[0].Cells[0].Value != null)
         {
-          if (row.Cells["Medicamento"].Value != null)
-          {
-            if (row.Cells["Cantidad"].Value == null && row.Cells["CUM"].Value == null && row.Cells["Lote"].Value == null && row.Cells["RegSanitario"].Value == null
-             && row.Cells["VlrCompra"].Value == null && row.Cells["VlrVenta"].Value == null)
-            {
-              valDetP = false;
-              errDet.SetError(listDetalles, "Faltan datos por ingresar");
-            }
-            else
-            {
-              valDetP = true;
-              errDet.SetError(listDetalles, "");
-            }
-          }
-          else
-          {
-            valDetP = false;
-            errDet.SetError(listDetalles, "Faltan datos por ingresar");
-          }
+          val = listDetalles.Rows.Cast<DataGridViewRow>().Any(x => x.Cells[0].Value != null && (x.Cells[1].Value == null || string.IsNullOrWhiteSpace(x.Cells[1].Value.ToString())) &&
+                                                            (x.Cells[2].Value == null || string.IsNullOrWhiteSpace(x.Cells[2].Value.ToString())) &&
+                                                            (x.Cells[3].Value == null || string.IsNullOrWhiteSpace(x.Cells[3].Value.ToString())) &&
+                                                            (x.Cells[4].Value == null || x.Cells[4].Value.ToString() == "0") && (x.Cells[5].Value == null || x.Cells[5].Value.ToString() == "0"));
         }
-        else
-        {
-          if(row.Cells["Medicamento"].Value != null)
-          {
-            if(row.Cells["Cantidad"].Value == null && row.Cells["CUM"].Value == null && row.Cells["Lote"].Value == null && row.Cells["RegSanitario"].Value == null
-              && row.Cells["VlrCompra"].Value == null && row.Cells["VlrVenta"].Value == null)
-            {
-              valDetP = false;
-              errDet.SetError(listDetalles, "Faltan datos por ingresar");
-            }
-            else
-            {
-              valDetP = true;
-              errDet.SetError(listDetalles, "");
-            }
-          }
-        }
+      }
+      if (val)
+      {
+        valDetP = false;
+        errDet.SetError(listDetalles, "Faltan datos por ingresar");
+      }
+      else
+      {
+        valDetP = true;
+        errDet.SetError(listDetalles, "");
       }
     }
 
@@ -284,7 +289,46 @@ namespace SysPharm.Views
 
     private void txtBuscar_TextChanged(object sender, EventArgs e)
     {
-      RefrescarListaPedidos();
+      RefrescarListaPedidos(pagina);
+    }
+
+    private void btnNext_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void doubleClickTables(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
+    private void btnPrev_Click(object sender, EventArgs e)
+    {
+      if (listaPedidos.HasPreviousPage)
+      {
+        RefrescarListaPedidos(--pagina);
+      }
+    }
+
+    private void btnNext_Click_1(object sender, EventArgs e)
+    {
+      if (listaPedidos.HasNextPage)
+      {
+        RefrescarListaPedidos(++pagina);
+      }
+    }
+
+    private void doubleClickTable(object sender, DataGridViewCellEventArgs e)
+    {
+      string message = $"¿Esta seguro que desea eliminar el medicamento?";
+      const string caption = "Advertencia!";
+      var result = MessageBox.Show(message, caption,
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Warning);
+      if (result == System.Windows.Forms.DialogResult.Yes)
+      {
+        listaDetalle.RemoveAt(e.RowIndex);
+      }
     }
   }
 }

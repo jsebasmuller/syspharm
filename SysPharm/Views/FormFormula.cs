@@ -1,4 +1,5 @@
-﻿using SysPharm.Controllers;
+﻿using PagedList;
+using SysPharm.Controllers;
 using SysPharm.Models;
 using SysPharm.Models.ViewModel;
 using System;
@@ -15,11 +16,12 @@ namespace SysPharm.Views
 {
   public partial class FormFormula : Form
   {
+    int pagina = 1;
     MedicamentoController medControl = new MedicamentoController(new Context());
     FormulaController formulaControl = new FormulaController(new Context());
     UsuarioController userControl = new UsuarioController(new Context());
     ServicioController servControl = new ServicioController(new Context());
-    List<FormulaViewModel> listaFormulas = new List<FormulaViewModel>();
+    IPagedList<FormulaViewModel> listaFormulas;
     private BindingList<DetalleFormulaViewModel> listaDetalle = new BindingList<DetalleFormulaViewModel>();
     List<Servicio> listaServicios = new List<Servicio>();
     List<Medicamento> listaMedicamentos = new List<Medicamento>();
@@ -34,6 +36,10 @@ namespace SysPharm.Views
     public FormFormula()
     {
       InitializeComponent();
+      dtFormula.Format = DateTimePickerFormat.Custom;
+      dtFormula.CustomFormat = "dd/MM/yyyy";
+      dtDespacho.Format = DateTimePickerFormat.Custom;
+      dtDespacho.CustomFormat = "dd/MM/yyyy";
       lblId.Text = formulaControl.GetNextId(DateTime.Now);
       lblTotal.Text = "$ 0";
       RefrescarListaFormulas();
@@ -108,18 +114,25 @@ namespace SysPharm.Views
       cmbServicio.AutoCompleteSource = AutoCompleteSource.CustomSource;
     }
 
-    private void RefrescarListaFormulas()
+    private void RefrescarListaFormulas(int pagina = 1)
     {
-      listaFormulas = formulaControl.GetFormulas();
+      int paginas = 0;
+      listaFormulas = formulaControl.GetFormulasPag(pagina);
       if (!txtBuscar.Text.Trim().Equals(""))
       {
-        listaFormulas = listaFormulas.Where(x => x.Id.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) /*||
-                                            x..Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) ||
-                                            x.VlrTotal.ToString().Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) ||
-                                            x.FechaIngreso.ToString().Trim().Contains(txtBuscar.Text.Trim()) ||
-                                            x.FechaPedido.ToString().Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())*/).ToList();
+        listaFormulas = formulaControl.BuscadorPag(txtBuscar.Text, pagina);
       }
-      listFormulas.DataSource = listaFormulas;
+      paginas = listaFormulas.PageCount;
+      if (pagina > listaFormulas.PageCount && listaFormulas.PageCount != 0)
+      {
+        paginas = 1;
+        pagina = paginas;
+        RefrescarListaFormulas(pagina);
+      }
+      listFormulas.DataSource = listaFormulas.ToList();
+      btnPrev.Enabled = listaFormulas.HasPreviousPage;
+      btnNext.Enabled = listaFormulas.HasNextPage;
+      lblPag.Text = string.Format("Página {0} de {1}", pagina, paginas == 0 ? 1 : paginas);
       listFormulas.Columns[1].HeaderText = "Fecha de Formula";
       listFormulas.Columns[2].HeaderText = "Fecha de Despacho";
       listFormulas.Columns[3].HeaderText = "Documento del Medico";
@@ -146,7 +159,7 @@ namespace SysPharm.Views
 
     private bool ValidarCampos(object sender, EventArgs e)
     {
-      if (valMedico && valPaci && valSer)
+      if (valMedico && valPaci && valSer && valDeta)
       {
         return true;
       }
@@ -162,47 +175,29 @@ namespace SysPharm.Views
 
     private void validateDetallePedido(object sender, EventArgs e)
     {
-      foreach (DataGridViewRow row in listDetalles.Rows)
+      bool val = true;
+      if(listDetalles.Rows.Count > 1)
       {
-        if (listDetalles.Rows.Count == 1)
+        val = listDetalles.Rows.Cast<DataGridViewRow>().Any(x => x.Cells[0].Value != null && (x.Cells[1].Value == null || x.Cells[1].Value.ToString() == "0") &&
+                                                                  (x.Cells[2].Value == null || x.Cells[2].Value.ToString() == "0"));
+      }
+      else
+      {
+        if(listDetalles.Rows[0].Cells[0].Value != null)
         {
-          if (row.Cells["Medicamento"].Value != null)
-          {
-            if (row.Cells["Cantidad"].Value == null && row.Cells["CantidadPendiente"].Value == null && row.Cells["CantidadFormula"].Value == null && 
-              row.Cells["VlrU"].Value == null && row.Cells["VlrT"].Value == null)
-            {
-              valDeta = false;
-              errDetalle.SetError(listDetalles, "Faltan datos por ingresar");
-            }
-            else
-            {
-              valDeta = true;
-              errDetalle.SetError(listDetalles, "");
-            }
-          }
-          else
-          {
-            valDeta = false;
-            errDetalle.SetError(listDetalles, "Faltan datos por ingresar");
-          }
+          val = listDetalles.Rows.Cast<DataGridViewRow>().Any(x => x.Cells[0].Value != null && (x.Cells[1].Value == null || x.Cells[1].Value.ToString() == "0") &&
+                                                                  (x.Cells[2].Value == null || x.Cells[2].Value.ToString() == "0"));
         }
-        else
-        {
-          if (row.Cells["Medicamento"].Value != null)
-          {
-            if (row.Cells["Cantidad"].Value == null && row.Cells["CantidadPendiente"].Value == null && row.Cells["CantidadFormula"].Value == null &&
-              row.Cells["VlrU"].Value == null && row.Cells["VlrT"].Value == null)
-            {
-              valDeta = false;
-              errDetalle.SetError(listDetalles, "Faltan datos por ingresar");
-            }
-            else
-            {
-              valDeta = true;
-              errDetalle.SetError(listDetalles, "");
-            }
-          }
-        }
+      }
+      if (val)
+      {
+        valDeta = false;
+        errDetalle.SetError(listDetalles, "Faltan datos por ingresar");
+      }
+      else
+      {
+        valDeta = true;
+        errDetalle.SetError(listDetalles, "");
       }
     }
 
@@ -345,11 +340,16 @@ namespace SysPharm.Views
 
     private void txtBuscar_TextChanged(object sender, EventArgs e)
     {
-      RefrescarListaFormulas();
+      RefrescarListaFormulas(pagina);
     }
 
     private void btnLimpiar_Click(object sender, EventArgs e)
     {
+      valMedicamento = false;
+      valMedico = false;
+      valPaci = false;
+      valDeta = false;
+      valSer = false;
       listDetalles.Rows.Clear();
       lblTotal.Text = "$ 0";
     }
@@ -396,7 +396,7 @@ namespace SysPharm.Views
           if (result == System.Windows.Forms.DialogResult.OK)
           {
             lblId.Text = formulaControl.GetNextId(formula.FechaDespacho);
-            RefrescarListaFormulas();
+            RefrescarListaFormulas(pagina);
             btnLimpiar_Click(sender, e);
           }
         }
@@ -415,6 +415,35 @@ namespace SysPharm.Views
         var result = MessageBox.Show(message, caption,
                                      MessageBoxButtons.OK,
                                      MessageBoxIcon.Warning);
+      }
+    }
+
+    private void btnPrev_Click(object sender, EventArgs e)
+    {
+      if (listaFormulas.HasPreviousPage)
+      {
+        RefrescarListaFormulas(--pagina);
+      }
+    }
+
+    private void btnNext_Click(object sender, EventArgs e)
+    {
+      if (listaFormulas.HasNextPage)
+      {
+        RefrescarListaFormulas(++pagina);
+      }
+    }
+
+    private void doubleClickTable(object sender, DataGridViewCellEventArgs e)
+    {
+      string message = $"¿Esta seguro que desea eliminar el medicamento?";
+      const string caption = "Advertencia!";
+      var result = MessageBox.Show(message, caption,
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Warning);
+      if (result == System.Windows.Forms.DialogResult.Yes)
+      {
+        listaDetalle.RemoveAt(e.RowIndex);
       }
     }
   }

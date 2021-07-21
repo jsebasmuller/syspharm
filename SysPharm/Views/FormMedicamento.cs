@@ -1,5 +1,7 @@
-﻿using SysPharm.Controllers;
+﻿using PagedList;
+using SysPharm.Controllers;
 using SysPharm.Models;
+using SysPharm.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,29 +17,53 @@ namespace SysPharm.Views
 {
   public partial class FormMedicamento : Form
   {
+    int pagina = 1;
     MedicamentoController medControl = new MedicamentoController(new Context());
-    List<Medicamento> listaMedicamentos = new List<Medicamento>();
+    private BindingList<MedicamentoVencidoViewModel> listaVencidos = new BindingList<MedicamentoVencidoViewModel>();
+    IPagedList<Medicamento> listaMedicamentos;
     bool valNombre = false;
     bool valVlrC = false;
     bool valVlrV = false;
+    bool valMed = false;
+    bool valDetMedVen = false;
 
     public FormMedicamento()
     {
       InitializeComponent();
-      RefrescarListaMedicamentos();
+      RefrescarListaMedicamentos(pagina);
     }
 
-    private void RefrescarListaMedicamentos()
+    private void RefrescarListaMedicamentos(int pagina=1)
     {
-      listaMedicamentos = medControl.GetMedicamentos();
+      int paginas = 0;
+      listaMedicamentos = medControl.GetMedicamentosPag(pagina);
+      var listaMedicamentosCmb = medControl.GetMedicamentos();
+      cmbMedicamentos.DataSource = listaMedicamentosCmb;
+      cmbMedicamentos.DisplayMember = "Nombre";
+      cmbMedicamentos.ValueMember = "Id";
+      AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+      foreach (var medicamento in listaMedicamentos)
+      {
+        collection.Add(medicamento.Nombre);
+      }
+      cmbMedicamentos.AutoCompleteCustomSource = collection;
+      cmbMedicamentos.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+      cmbMedicamentos.AutoCompleteSource = AutoCompleteSource.CustomSource;
       if (!txtBuscar.Text.Trim().Equals(""))
       {
-        listaMedicamentos = listaMedicamentos.Where(x => x.Cantidad.ToString().Contains(txtBuscar.Text.Trim()) ||
-                                            x.Nombre.Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower()) ||
-                                            x.VlrCompra.ToString().Trim().Contains(txtBuscar.Text.Trim()) ||
-                                            x.VlrVenta.ToString().Trim().ToLower().Contains(txtBuscar.Text.Trim().ToLower())).ToList();
+        listaMedicamentos = medControl.BuscadorPag(txtBuscar.Text, pagina);
       }
-      listMedicamentos.DataSource = listaMedicamentos;
+      paginas = listaMedicamentos.PageCount;
+      if (pagina > listaMedicamentos.PageCount && listaMedicamentos.PageCount != 0)
+      {
+        paginas = 1;
+        pagina = paginas;
+        RefrescarListaMedicamentos(pagina);
+      }
+      listMedicamentos.DataSource = listaMedicamentos.ToList();
+      btnPrev.Enabled = listaMedicamentos.HasPreviousPage;
+      btnNext.Enabled = listaMedicamentos.HasNextPage;
+      lblPag.Text = string.Format("Página {0} de {1}", pagina, paginas == 0 ? 1 : paginas);
       listMedicamentos.Columns[3].HeaderText = "Valor de Compra";
       listMedicamentos.Columns[4].HeaderText = "Valor de Venta";
       listMedicamentos.AutoResizeColumns();
@@ -124,7 +150,7 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (result == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaMedicamentos();
+            RefrescarListaMedicamentos(pagina);
             btnGuardar.Visible = true;
             btnLimpiar.Visible = true;
             btnCancel.Visible = false;
@@ -173,7 +199,7 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (result == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaMedicamentos();
+            RefrescarListaMedicamentos(pagina);
             LimpiarDatos(sender, e);
           }
         }
@@ -213,6 +239,9 @@ namespace SysPharm.Views
 
     private void LimpiarDatos(object sender, EventArgs e)
     {
+      valNombre = false;
+      valVlrC = false;
+      valVlrV = false;
       txtNom.Text = "";
       txtVlrC.Text = "";
       txtVlrV.Text = "";
@@ -237,7 +266,7 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (resp == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaMedicamentos();
+            RefrescarListaMedicamentos(pagina);
             LimpiarDatos(sender, e);
             btnGuardar.Visible = true;
             btnLimpiar.Visible = true;
@@ -297,7 +326,7 @@ namespace SysPharm.Views
           var resp = MessageBox.Show(success.Mensaje, "¡Carga!",
                                        MessageBoxButtons.OK,
                                        MessageBoxIcon.None);
-          RefrescarListaMedicamentos();
+          RefrescarListaMedicamentos(pagina);
         }
         else
         {
@@ -311,7 +340,188 @@ namespace SysPharm.Views
 
     private void txtBuscar_TextChanged(object sender, EventArgs e)
     {
-      RefrescarListaMedicamentos();
+      RefrescarListaMedicamentos(pagina);
+    }
+
+    private void btnPrev_Click(object sender, EventArgs e)
+    {
+      if (listaMedicamentos.HasPreviousPage)
+      {
+        RefrescarListaMedicamentos(--pagina);
+      }
+    }
+
+    private void btnNext_Click(object sender, EventArgs e)
+    {
+      if (listaMedicamentos.HasNextPage)
+      {
+        RefrescarListaMedicamentos(++pagina);
+      }
+    }
+
+    private bool ValidarMedicamentosVencidos(object sender, EventArgs e)
+    {
+      if (valDetMedVen)
+      {
+        return true;
+      }
+      else
+      {
+        validateDetallePedido(sender, e);
+        return false;
+      }
+    }
+
+    private void validateDetallePedido(object sender, EventArgs e)
+    {
+      bool val = listDetalles.Rows.Cast<DataGridViewRow>().Any(x => x.Cells[0].Value != null && (x.Cells[1].Value == null || x.Cells[1].Value.ToString() == "0"));
+      if (val)
+      {
+        valDetMedVen = false;
+        errMedVen.SetError(listDetalles, "Faltan datos por ingresar");
+      }
+      else
+      {
+        valDetMedVen = true;
+        errMedVen.SetError(listDetalles, "");
+      }
+    }
+
+    private void validateMedicamento(object sender, EventArgs e)
+    {
+      if (cmbMedicamentos.SelectedItem == null)
+      {
+        valMed = false;
+        errMedi.SetError(cmbMedicamentos, "Debe seleccionar una opción");
+      }
+      else
+      {
+        valMed = true;
+        errMedi.SetError(cmbMedicamentos, "");
+      }
+    }
+
+    private void RefrescarListaVencidos()
+    {
+      listDetalles.DataSource = listaVencidos;
+      listDetalles.Columns[2].Visible = false;
+      listDetalles.Columns[3].Visible = false;
+      listDetalles.AutoResizeColumns();
+      listDetalles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+    }
+
+    private void btnAddMedi_Click(object sender, EventArgs e)
+    {
+      if (valMed)
+      {
+        var detalleMed = new MedicamentoVencidoViewModel();
+        detalleMed.Medicamento = cmbMedicamentos.GetItemText(cmbMedicamentos.SelectedItem);
+        var pass = listaVencidos.Any(x => x.Medicamento.Trim().ToLower() == detalleMed.Medicamento.Trim().ToLower());
+        if (pass)
+        {
+          string message = "El medicamento seleccionado ya ha sido agregado";
+          const string caption = "Advertencia";
+          var result = MessageBox.Show(message, caption,
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Warning);
+        }
+        else
+        {
+          listaVencidos.Add(detalleMed);
+          RefrescarListaVencidos();
+        }
+      }
+      else
+      {
+        string message = "Debe seleccionar un medicamento";
+        const string caption = "Error";
+        var result = MessageBox.Show(message, caption,
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+      }
+    }
+
+    private void doubleClickTable(object sender, DataGridViewCellEventArgs e)
+    {
+      string message = $"¿Esta seguro que desea eliminar el medicamento?";
+      const string caption = "Advertencia!";
+      var result = MessageBox.Show(message, caption,
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Warning);
+      if (result == System.Windows.Forms.DialogResult.Yes)
+      {
+        listaVencidos.RemoveAt(e.RowIndex);
+      }
+    }
+
+    private void listDetalles_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+      if (listDetalles[1, e.RowIndex].Value != null)
+      {
+        var medicamento = medControl.GetMedicamento(listDetalles[0, e.RowIndex].Value.ToString());
+        if (medicamento.Cantidad < Int32.Parse(listDetalles[1, e.RowIndex].Value.ToString()))
+        {
+          listDetalles[1, e.RowIndex].Value = 0;
+          string message = "Registro una cantidad mayor a la que hay en inventario";
+          const string caption = "¡Advertencia!";
+          var result = MessageBox.Show(message, caption,
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Error);
+        }
+      }
+      validateDetallePedido(sender, e);
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      if (ValidarMedicamentosVencidos(sender, e))
+      {
+        List<MedicamentoVencido> listMedVen = new List<MedicamentoVencido>();
+        
+        foreach (DataGridViewRow row in listDetalles.Rows)
+        {
+          if (row.Cells["Medicamento"].Value != null)
+          {
+            MedicamentoVencido medVen = new MedicamentoVencido();
+            medVen.Cantidad = Int32.Parse(row.Cells["Cantidad"].Value.ToString());
+            var medicamento = medControl.GetMedicamento(row.Cells["Medicamento"].Value.ToString());
+            if (medicamento != null)
+            {
+              medVen.IdMedicamento = medicamento.Id;
+              medVen.ValorCompra = medicamento.VlrCompra;
+            }
+            medVen.FechaRegistro = DateTime.Now;
+            listMedVen.Add(medVen);
+          }
+        }
+        var resp = medControl.RegisterMedicamentoVencido(listMedVen);
+        if (resp.Respuesta)
+        {
+          var result = MessageBox.Show(resp.Mensaje, "Pedido Registrado",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.None);
+          if (result == System.Windows.Forms.DialogResult.OK)
+          {
+            RefrescarListaMedicamentos(pagina);
+            listDetalles.Rows.Clear();
+          }
+        }
+        else
+        {
+          var result = MessageBox.Show(resp.Mensaje, "Error",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+          medControl = new MedicamentoController(new Context());
+        }
+      }
+      else
+      {
+        const string message = "Faltan campos por llenar";
+        const string caption = "Advertencia!";
+        var result = MessageBox.Show(message, caption,
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Warning);
+      }
     }
   }
 }

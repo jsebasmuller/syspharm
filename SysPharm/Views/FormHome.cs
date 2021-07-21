@@ -111,5 +111,15 @@ namespace SysPharm.Views
     {
       abrirForm(new FormInforme());
     }
+
+    private void btnPassword_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormContraseña());
+    }
+
+    private void btnArqueo_Click(object sender, EventArgs e)
+    {
+      abrirForm(new FormArqueo());
+    }
   }
 }

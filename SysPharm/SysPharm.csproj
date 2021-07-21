@@ -6,15 +6,31 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{11CADFB6-CE11-447D-AFC3-C8F1A9B0C401}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Proyecto_Farmacia</RootNamespace>
-    <AssemblyName>Proyecto_Farmacia</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SysPharm</RootNamespace>
+    <AssemblyName>SysPharm</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\LEGION\OneDrive\Desktop\Instalador\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,12 +51,39 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Imagen1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DC2E133BCF9D2428D6A9FFA2FA61E0C8B70D46C4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SysPharm_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.Compression.Base, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Compression.Base.19.2.0.44\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
@@ -68,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\FormulaController.cs" />
+    <Compile Include="Controllers\InformeController.cs" />
     <Compile Include="Controllers\MedicamentoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
@@ -86,15 +130,44 @@
     <Compile Include="Migrations\202107040200551_AddCantidadPendiente.designer.cs">
       <DependentUpon>202107040200551_AddCantidadPendiente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107160206287_AddInventarioFinMes.cs" />
+    <Compile Include="Migrations\202107160206287_AddInventarioFinMes.designer.cs">
+      <DependentUpon>202107160206287_AddInventarioFinMes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107192352593_UpdateTables.cs" />
+    <Compile Include="Migrations\202107192352593_UpdateTables.designer.cs">
+      <DependentUpon>202107192352593_UpdateTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107200042591_UpdateTableNo.cs" />
+    <Compile Include="Migrations\202107200042591_UpdateTableNo.designer.cs">
+      <DependentUpon>202107200042591_UpdateTableNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Arqueo.cs" />
     <Compile Include="Models\DetalleFormula.cs" />
     <Compile Include="Models\Ingreso.cs" />
     <Compile Include="Models\DetallePedido.cs" />
+    <Compile Include="Models\InventarioFinMes.cs" />
+    <Compile Include="Models\MedicamentoVencido.cs" />
+    <Compile Include="Models\ViewModel\ArqueoViewModel.cs" />
     <Compile Include="Models\ViewModel\FormulaViewModel.cs" />
     <Compile Include="Models\ViewModel\DetalleFormulaViewModel.cs" />
     <Compile Include="Models\ViewModel\DetallePedidoViewModel.cs" />
+    <Compile Include="Models\ViewModel\MedicamentoVencidoViewModel.cs" />
     <Compile Include="Models\ViewModel\PacienteViewModel.cs" />
     <Compile Include="Models\ViewModel\ResponseViewModel.cs" />
+    <Compile Include="Views\FormArqueo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormArqueo.Designer.cs">
+      <DependentUpon>FormArqueo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormContraseña.Designer.cs">
+      <DependentUpon>FormContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormEPS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +241,15 @@
     <EmbeddedResource Include="Migrations\202107040200551_AddCantidadPendiente.resx">
       <DependentUpon>202107040200551_AddCantidadPendiente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107160206287_AddInventarioFinMes.resx">
+      <DependentUpon>202107160206287_AddInventarioFinMes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107192352593_UpdateTables.resx">
+      <DependentUpon>202107192352593_UpdateTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107200042591_UpdateTableNo.resx">
+      <DependentUpon>202107200042591_UpdateTableNo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -176,7 +258,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\FormArqueo.resx">
+      <DependentUpon>FormArqueo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormContraseña.resx">
+      <DependentUpon>FormContraseña.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FormEPS.resx">
       <DependentUpon>FormEPS.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +294,7 @@
       <DependentUpon>FormUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -214,11 +304,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SysPharm_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SqlServer.SqlLocalDB.11.1">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2012 Express LocalDB</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Database.mdf</DependentUpon>
+    </Content>
+    <Content Include="Imagen1.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

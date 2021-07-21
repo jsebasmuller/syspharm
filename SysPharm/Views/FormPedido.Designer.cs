@@ -29,11 +29,12 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPedido));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabPedidos = new System.Windows.Forms.TabControl();
       this.tabAddPedido = new System.Windows.Forms.TabPage();
+      this.lblId = new System.Windows.Forms.Label();
       this.listDetalles = new System.Windows.Forms.DataGridView();
       this.btnLimpiar = new System.Windows.Forms.Button();
       this.btnGuardar = new System.Windows.Forms.Button();
@@ -47,6 +48,9 @@
       this.label1 = new System.Windows.Forms.Label();
       this.cmbMedicamentos = new System.Windows.Forms.ComboBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.lblPag = new System.Windows.Forms.Label();
+      this.btnNext = new System.Windows.Forms.Button();
+      this.btnPrev = new System.Windows.Forms.Button();
       this.label10 = new System.Windows.Forms.Label();
       this.txtBuscar = new System.Windows.Forms.TextBox();
       this.listPedidos = new System.Windows.Forms.DataGridView();
@@ -55,7 +59,6 @@
       this.errFecS = new System.Windows.Forms.ErrorProvider(this.components);
       this.errFecI = new System.Windows.Forms.ErrorProvider(this.components);
       this.errDet = new System.Windows.Forms.ErrorProvider(this.components);
-      this.lblId = new System.Windows.Forms.Label();
       this.tabPedidos.SuspendLayout();
       this.tabAddPedido.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listDetalles)).BeginInit();
@@ -106,23 +109,34 @@
       this.tabAddPedido.TabIndex = 0;
       this.tabAddPedido.Text = "Agregar Pedido";
       // 
+      // lblId
+      // 
+      this.lblId.AutoSize = true;
+      this.lblId.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblId.Location = new System.Drawing.Point(38, 13);
+      this.lblId.Name = "lblId";
+      this.lblId.Size = new System.Drawing.Size(44, 17);
+      this.lblId.TabIndex = 22;
+      this.lblId.Text = "label5";
+      // 
       // listDetalles
       // 
       this.listDetalles.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.listDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.listDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listDetalles.EnableHeadersVisualStyles = false;
       this.listDetalles.Location = new System.Drawing.Point(41, 130);
       this.listDetalles.Name = "listDetalles";
       this.listDetalles.Size = new System.Drawing.Size(727, 230);
       this.listDetalles.TabIndex = 21;
+      this.listDetalles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTable);
       this.listDetalles.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.listDetalles_CellEndEdit);
       // 
       // btnLimpiar
@@ -185,6 +199,7 @@
       // dtIngreso
       // 
       this.dtIngreso.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.dtIngreso.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
       this.dtIngreso.Location = new System.Drawing.Point(547, 49);
       this.dtIngreso.Margin = new System.Windows.Forms.Padding(4);
       this.dtIngreso.Name = "dtIngreso";
@@ -206,6 +221,7 @@
       // dtSolicitud
       // 
       this.dtSolicitud.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.dtSolicitud.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
       this.dtSolicitud.Location = new System.Drawing.Point(179, 49);
       this.dtSolicitud.Margin = new System.Windows.Forms.Padding(4);
       this.dtSolicitud.Name = "dtSolicitud";
@@ -256,6 +272,9 @@
       // tabPage2
       // 
       this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage2.Controls.Add(this.lblPag);
+      this.tabPage2.Controls.Add(this.btnNext);
+      this.tabPage2.Controls.Add(this.btnPrev);
       this.tabPage2.Controls.Add(this.label10);
       this.tabPage2.Controls.Add(this.txtBuscar);
       this.tabPage2.Controls.Add(this.listPedidos);
@@ -266,6 +285,40 @@
       this.tabPage2.Size = new System.Drawing.Size(792, 420);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Lista de Pedidos";
+      // 
+      // lblPag
+      // 
+      this.lblPag.AutoSize = true;
+      this.lblPag.Cursor = System.Windows.Forms.Cursors.HSplit;
+      this.lblPag.Location = new System.Drawing.Point(365, 389);
+      this.lblPag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblPag.Name = "lblPag";
+      this.lblPag.Size = new System.Drawing.Size(64, 17);
+      this.lblPag.TabIndex = 11;
+      this.lblPag.Text = "Buscador";
+      // 
+      // btnNext
+      // 
+      this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNext.Location = new System.Drawing.Point(474, 386);
+      this.btnNext.Name = "btnNext";
+      this.btnNext.Size = new System.Drawing.Size(25, 23);
+      this.btnNext.TabIndex = 13;
+      this.btnNext.Text = ">";
+      this.btnNext.UseVisualStyleBackColor = true;
+      this.btnNext.Click += new System.EventHandler(this.btnNext_Click_1);
+      // 
+      // btnPrev
+      // 
+      this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPrev.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnPrev.Location = new System.Drawing.Point(320, 386);
+      this.btnPrev.Name = "btnPrev";
+      this.btnPrev.Size = new System.Drawing.Size(25, 23);
+      this.btnPrev.TabIndex = 12;
+      this.btnPrev.Text = "<";
+      this.btnPrev.UseVisualStyleBackColor = true;
+      this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
       // 
       // label10
       // 
@@ -289,20 +342,20 @@
       // listPedidos
       // 
       this.listPedidos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.listPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
       this.listPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listPedidos.EnableHeadersVisualStyles = false;
       this.listPedidos.Location = new System.Drawing.Point(8, 42);
       this.listPedidos.Margin = new System.Windows.Forms.Padding(4);
       this.listPedidos.Name = "listPedidos";
-      this.listPedidos.Size = new System.Drawing.Size(775, 369);
+      this.listPedidos.Size = new System.Drawing.Size(775, 337);
       this.listPedidos.TabIndex = 0;
       // 
       // errMedi
@@ -324,16 +377,6 @@
       // errDet
       // 
       this.errDet.ContainerControl = this;
-      // 
-      // lblId
-      // 
-      this.lblId.AutoSize = true;
-      this.lblId.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblId.Location = new System.Drawing.Point(38, 13);
-      this.lblId.Name = "lblId";
-      this.lblId.Size = new System.Drawing.Size(44, 17);
-      this.lblId.TabIndex = 22;
-      this.lblId.Text = "label5";
       // 
       // FormPedido
       // 
@@ -390,5 +433,8 @@
     private System.Windows.Forms.ErrorProvider errFecI;
     private System.Windows.Forms.ErrorProvider errDet;
     private System.Windows.Forms.Label lblId;
+    private System.Windows.Forms.Label lblPag;
+    private System.Windows.Forms.Button btnNext;
+    private System.Windows.Forms.Button btnPrev;
   }
 }

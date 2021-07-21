@@ -199,6 +199,7 @@ namespace SysPharm.Views
 
     private void LimpiarDatos(object sender, EventArgs e)
     {
+      valName = false;
       txtNomEps.Text = "";
     }
 

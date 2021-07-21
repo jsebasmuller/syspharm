@@ -12,6 +12,7 @@ using SysPharm.Models.ViewModel;
 using System.IO;
 using SysPharm.Helpers;
 using System.Data.Entity;
+using PagedList;
 
 namespace SysPharm.Controllers
 {
@@ -41,7 +42,7 @@ namespace SysPharm.Controllers
         _context.SaveChanges();
         response.Respuesta = true;
         response.Mensaje = "¡Usuario Creado Satisfactoriamente!";
-      }catch(Exception e)
+      } catch (Exception e)
       {
         response.Respuesta = false;
         response.Mensaje = e.Message;
@@ -53,7 +54,7 @@ namespace SysPharm.Controllers
     {
       var response = new ResponseViewModel();
       var userDB = _context.Usuarios.Where(x => x.Documento == user.Documento).FirstOrDefault();
-      if(userDB == null)
+      if (userDB == null)
       {
         response.Respuesta = false;
         response.Mensaje = "Usuario no encontrado";
@@ -71,10 +72,31 @@ namespace SysPharm.Controllers
         _context.SaveChanges();
         response.Respuesta = true;
         response.Mensaje = "¡Usuario Modificado Satisfactoriamente!";
-      }catch(Exception e)
+      } catch (Exception e)
       {
         response.Mensaje = e.Message;
         response.Respuesta = false;
+      }
+      return response;
+    }
+
+    public ResponseViewModel ChangePass(Ingreso ingreso)
+    {
+      var response = new ResponseViewModel();
+      try
+      {
+        var ingresoDB = _context.Ingresos.Where(x => x.IsActive).FirstOrDefault();
+        ingresoDB.IsActive = false;
+        _context.SaveChanges();
+        _context.Ingresos.Add(ingreso);
+        _context.SaveChanges();
+        response.Respuesta = true;
+        response.Mensaje = "Contraseña cambiada con exito!";
+      }catch(Exception e)
+      {
+        response.Respuesta = false;
+        response.Mensaje = e.Message;
+        return response;
       }
       return response;
     }
@@ -91,7 +113,7 @@ namespace SysPharm.Controllers
           _context.SaveChanges();
           response.Respuesta = true;
           response.Mensaje = "¡Usuario Eliminado!";
-        }catch(Exception e)
+        } catch (Exception e)
         {
           response.Mensaje = e.Message;
           response.Respuesta = false;
@@ -102,6 +124,38 @@ namespace SysPharm.Controllers
       response.Mensaje = "Usuario no encontrado";
       response.Respuesta = false;
       return response;
+    }
+
+    public IPagedList<PacienteViewModel> GetPacientesPag(int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "paciente").Select(x => new PacienteViewModel
+                              {
+                                Documento = x.Documento,
+                                TipoDocumento = x.TipoDocumento.Nombre,
+                                Nombres = x.Nombres,
+                                Direccion = x.Direccion,
+                                Telefono = x.Telefono,
+                                EPS = x.Eps.Nombre
+                              }).OrderBy(x => x.Nombres).ToPagedList(pageNumber, 13);
+    }
+
+    public IPagedList<PacienteViewModel> BuscadorPacientesPag(string txtBuscarPac, int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "paciente").Select(x => new PacienteViewModel
+                              {
+                                Documento = x.Documento,
+                                TipoDocumento = x.TipoDocumento.Nombre,
+                                Nombres = x.Nombres,
+                                Direccion = x.Direccion,
+                                Telefono = x.Telefono,
+                                EPS = x.Eps.Nombre
+                              }).Where(x => x.Documento.Contains(txtBuscarPac.Trim()) ||
+                                            x.Nombres.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower()) ||
+                                            x.Telefono.Trim().Contains(txtBuscarPac.Trim()) ||
+                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower()) ||
+                                            x.EPS.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower())).OrderBy(x => x.Nombres).ToPagedList(pageNumber, 13);
     }
 
     public List<PacienteViewModel> GetPacientes()
@@ -117,7 +171,40 @@ namespace SysPharm.Controllers
                                 Direccion = x.Direccion,
                                 Telefono = x.Telefono,
                                 EPS = x.Eps.Nombre
-                              }).ToList();
+                              }).OrderBy(x => x.Nombres).ToList();
+    }
+
+    public IPagedList<PacienteViewModel> GetMedicosPag(int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "medico").Select(x => new PacienteViewModel
+      {
+        Documento = x.Documento,
+        TipoDocumento = x.TipoDocumento.Nombre,
+        Nombres = x.Nombres,
+        Direccion = x.Direccion,
+        Telefono = x.Telefono,
+        EPS = x.Eps.Nombre
+      }).OrderBy(x => x.Nombres).ToPagedList(pageNumber, 13);
+    }
+
+    public IPagedList<PacienteViewModel> BuscadorMedicosPag(string txtBuscarPac, int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Usuarios.Where(x => x.TipoUsuario.ToLower() == "medico").Select(x => new PacienteViewModel
+                                                                              {
+                                                                                Documento = x.Documento,
+                                                                                TipoDocumento = x.TipoDocumento.Nombre,
+                                                                                Nombres = x.Nombres,
+                                                                                Direccion = x.Direccion,
+                                                                                Telefono = x.Telefono,
+                                                                                EPS = x.Eps.Nombre
+                                                                              })
+                              .Where(x => x.Documento.Contains(txtBuscarPac.Trim()) ||
+                                            x.Nombres.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower()) ||
+                                            x.Telefono.Trim().Contains(txtBuscarPac.Trim()) ||
+                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower()) ||
+                                            x.EPS.Trim().ToLower().Contains(txtBuscarPac.Trim().ToLower())).OrderBy(x => x.Nombres).ToPagedList(pageNumber, 13);
     }
 
     public List<PacienteViewModel> GetMedicos()
@@ -133,7 +220,7 @@ namespace SysPharm.Controllers
                                 Direccion = x.Direccion,
                                 Telefono = x.Telefono,
                                 EPS = x.Eps.Nombre
-                              }).ToList();
+                              }).OrderBy(x => x.Nombres).ToList();
     }
 
     public List<TipoDocumento> GetTipoDocumentos()
@@ -272,13 +359,13 @@ namespace SysPharm.Controllers
           _context.Usuarios.Add(usuario);
           if (count == 100)
           {
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             count = 0;
           }
           row++;
           count++;
         }
-        _context.SaveChangesAsync();
+        _context.SaveChanges();
         response.Respuesta = true;
         response.Mensaje = "La carga masiva ha sido registrada correctamente";
       }

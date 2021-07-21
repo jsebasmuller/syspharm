@@ -1,4 +1,5 @@
-﻿using SysPharm.Controllers;
+﻿using PagedList;
+using SysPharm.Controllers;
 using SysPharm.Models;
 using SysPharm.Models.ViewModel;
 using System;
@@ -16,10 +17,11 @@ namespace SysPharm.Views
 {
   public partial class FormUsuario : Form
   {
+    int paginaPac = 1, paginaMed = 1;
     UsuarioController userControl = new UsuarioController(new Context());
     EPSController epsControl = new EPSController(new Context());
-    List<PacienteViewModel> listPacientes = new List<PacienteViewModel>();
-    List<PacienteViewModel> listaMedicos = new List<PacienteViewModel>();
+    IPagedList<PacienteViewModel> listPacientes;
+    IPagedList<PacienteViewModel> listaMedicos;
     List<TipoDocumento> listTDoc;
     List<TipoDocumento> listTUsu = new List<TipoDocumento>();
     List<Eps> listEps;
@@ -41,18 +43,25 @@ namespace SysPharm.Views
       ObtenerTipoUsuario();
     }
 
-    private void RefrescarListaPacientes()
+    private void RefrescarListaPacientes(int paginaPac = 1)
     {
-      listPacientes = userControl.GetPacientes();
+      int paginas = 0;
+      listPacientes = userControl.GetPacientesPag(paginaPac);
       if (!txtBuscarPac.Text.Trim().Equals(""))
       {
-        listPacientes = listPacientes.Where(x => x.Documento.Contains(txtBuscarPac.Text.Trim()) || 
-                                            x.Nombres.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower()) || 
-                                            x.Telefono.Trim().Contains(txtBuscarPac.Text.Trim()) ||
-                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower()) ||
-                                            x.EPS.Trim().ToLower().Contains(txtBuscarPac.Text.Trim().ToLower())).ToList();
+        listPacientes = userControl.BuscadorPacientesPag(txtBuscarPac.Text, paginaPac);
       }
-      listUsuarios.DataSource = listPacientes;
+      paginas = listPacientes.PageCount;
+      if (paginaPac > listPacientes.PageCount && listPacientes.PageCount != 0)
+      {
+        paginas = 1;
+        paginaPac = paginas;
+        RefrescarListaPacientes(paginaPac);
+      }
+      listUsuarios.DataSource = listPacientes.ToList();
+      btnPrevPac.Enabled = listPacientes.HasPreviousPage;
+      btnNextPac.Enabled = listPacientes.HasNextPage;
+      lblPagPac.Text = string.Format("Página {0} de {1}", paginaPac, paginas == 0 ? 1 : paginas);
       listUsuarios.Columns[1].HeaderText = "Tipo de Documento";
       listUsuarios.Columns[3].HeaderText = "Dirección";
       listUsuarios.Columns[4].HeaderText = "Teléfono";
@@ -60,18 +69,25 @@ namespace SysPharm.Views
       listUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
     }
 
-    private void RefrescarListaMedicos()
+    private void RefrescarListaMedicos(int paginaMed = 1)
     {
-      listaMedicos = userControl.GetMedicos();
+      int paginas = 0;
+      listaMedicos = userControl.GetMedicosPag(paginaMed);
       if (!txtBuscarMed.Text.Trim().Equals(""))
       {
-        listaMedicos = listaMedicos.Where(x => x.Documento.Contains(txtBuscarMed.Text.Trim()) ||
-                                            x.Nombres.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower()) ||
-                                            x.Telefono.Trim().Contains(txtBuscarMed.Text.Trim()) ||
-                                            x.TipoDocumento.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower()) ||
-                                            x.EPS.Trim().ToLower().Contains(txtBuscarMed.Text.Trim().ToLower())).ToList();
+        listaMedicos = userControl.BuscadorMedicosPag(txtBuscarMed.Text, paginaMed);
       }
-      listMedicos.DataSource = listaMedicos;
+      paginas = listaMedicos.PageCount;
+      if (paginaMed > listaMedicos.PageCount && listaMedicos.PageCount != 0)
+      {
+        paginas = 1;
+        paginaMed = paginas;
+        RefrescarListaMedicos(paginaMed);
+      }
+      listMedicos.DataSource = listaMedicos.ToList();
+      btnPrevMed.Enabled = listaMedicos.HasPreviousPage;
+      btnNextMed.Enabled = listaMedicos.HasNextPage;
+      lblPagMed.Text = string.Format("Página {0} de {1}", paginaMed, paginas == 0 ? 1 : paginas);
       listMedicos.Columns[1].HeaderText = "Tipo de Documento";
       listMedicos.Columns[3].HeaderText = "Dirección";
       listMedicos.Columns[4].HeaderText = "Teléfono";
@@ -145,8 +161,8 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (result == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaPacientes();
-            RefrescarListaMedicos();
+            RefrescarListaPacientes(paginaPac);
+            RefrescarListaMedicos(paginaMed);
             LimpiarDatos(sender, e);
           }
         }
@@ -273,6 +289,13 @@ namespace SysPharm.Views
 
     private void LimpiarDatos(object sender, EventArgs e)
     {
+      valNames = false;
+      valTDoc = false;
+      valTel = false;
+      valTUs = false;
+      valDir = false;
+      valDoc = false;
+      valEps = false;
       txtDireccion.Text = "";
       txtDoc.Text = "";
       txtNombres.Text = "";
@@ -331,8 +354,8 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (result == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaPacientes();
-            RefrescarListaMedicos();
+            RefrescarListaPacientes(paginaPac);
+            RefrescarListaMedicos(paginaMed);
             btnGuardar.Visible = true;
             btnLimpiar.Visible = true;
             btnCancel.Visible = false;
@@ -379,8 +402,8 @@ namespace SysPharm.Views
                                        MessageBoxIcon.None);
           if (resp == System.Windows.Forms.DialogResult.OK)
           {
-            RefrescarListaPacientes();
-            RefrescarListaMedicos();
+            RefrescarListaPacientes(paginaPac);
+            RefrescarListaMedicos(paginaMed);
             LimpiarDatos(sender, e);
             btnGuardar.Visible = true;
             btnLimpiar.Visible = true;
@@ -442,8 +465,8 @@ namespace SysPharm.Views
           var resp = MessageBox.Show(success.Mensaje, "¡Carga!",
                                        MessageBoxButtons.OK,
                                        MessageBoxIcon.None);
-          RefrescarListaPacientes();
-          RefrescarListaMedicos();
+          RefrescarListaPacientes(paginaPac);
+          RefrescarListaMedicos(paginaMed);
         }
         else
         {
@@ -457,12 +480,44 @@ namespace SysPharm.Views
 
     private void txtBuscar_TextChanged(object sender, EventArgs e)
     {
-      RefrescarListaPacientes();
+      RefrescarListaPacientes(paginaPac);
     }
 
     private void txtBuscarMed_TextChanged(object sender, EventArgs e)
     {
-      RefrescarListaMedicos();
+      RefrescarListaMedicos(paginaMed);
+    }
+
+    private void btnPrevPac_Click(object sender, EventArgs e)
+    {
+      if (listPacientes.HasPreviousPage)
+      {
+        RefrescarListaPacientes(--paginaPac);
+      }
+    }
+
+    private void btnPrevMed_Click(object sender, EventArgs e)
+    {
+      if (listaMedicos.HasPreviousPage)
+      {
+        RefrescarListaMedicos(--paginaMed);
+      }
+    }
+
+    private void btnNextMed_Click(object sender, EventArgs e)
+    {
+      if (listaMedicos.HasNextPage)
+      {
+        RefrescarListaMedicos(++paginaMed);
+      }
+    }
+
+    private void btnNextPac_Click(object sender, EventArgs e)
+    {
+      if (listPacientes.HasNextPage)
+      {
+        RefrescarListaPacientes(++paginaPac);
+      }
     }
   }
 }

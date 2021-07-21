@@ -38,6 +38,8 @@
       this.btnMaximizar = new System.Windows.Forms.PictureBox();
       this.btnCerrar = new System.Windows.Forms.PictureBox();
       this.pnlNav = new System.Windows.Forms.Panel();
+      this.panel8 = new System.Windows.Forms.Panel();
+      this.btnPassword = new System.Windows.Forms.Button();
       this.panel7 = new System.Windows.Forms.Panel();
       this.panel6 = new System.Windows.Forms.Panel();
       this.btnFormula = new System.Windows.Forms.Button();
@@ -54,6 +56,8 @@
       this.btnUsuarios = new System.Windows.Forms.Button();
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.pnlContenedor = new System.Windows.Forms.Panel();
+      this.panel9 = new System.Windows.Forms.Panel();
+      this.btnArqueo = new System.Windows.Forms.Button();
       this.pnlTitulo.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.btnMinWin)).BeginInit();
@@ -89,7 +93,7 @@
       this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(57)))), ((int)(((byte)(84)))));
-      this.label1.Location = new System.Drawing.Point(63, 9);
+      this.label1.Location = new System.Drawing.Point(53, 9);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(65, 21);
       this.label1.TabIndex = 5;
@@ -103,7 +107,7 @@
       this.label2.BackColor = System.Drawing.Color.Transparent;
       this.label2.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-      this.label2.Location = new System.Drawing.Point(35, 9);
+      this.label2.Location = new System.Drawing.Point(26, 9);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(34, 21);
       this.label2.TabIndex = 6;
@@ -177,6 +181,10 @@
       // pnlNav
       // 
       this.pnlNav.BackColor = System.Drawing.SystemColors.ButtonFace;
+      this.pnlNav.Controls.Add(this.panel9);
+      this.pnlNav.Controls.Add(this.btnArqueo);
+      this.pnlNav.Controls.Add(this.panel8);
+      this.pnlNav.Controls.Add(this.btnPassword);
       this.pnlNav.Controls.Add(this.panel7);
       this.pnlNav.Controls.Add(this.panel6);
       this.pnlNav.Controls.Add(this.btnFormula);
@@ -198,6 +206,30 @@
       this.pnlNav.Name = "pnlNav";
       this.pnlNav.Size = new System.Drawing.Size(220, 615);
       this.pnlNav.TabIndex = 2;
+      // 
+      // panel8
+      // 
+      this.panel8.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.panel8.Location = new System.Drawing.Point(0, 537);
+      this.panel8.Name = "panel8";
+      this.panel8.Size = new System.Drawing.Size(10, 35);
+      this.panel8.TabIndex = 11;
+      // 
+      // btnPassword
+      // 
+      this.btnPassword.FlatAppearance.BorderSize = 0;
+      this.btnPassword.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.btnPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPassword.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnPassword.Image = ((System.Drawing.Image)(resources.GetObject("btnPassword.Image")));
+      this.btnPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnPassword.Location = new System.Drawing.Point(4, 537);
+      this.btnPassword.Name = "btnPassword";
+      this.btnPassword.Size = new System.Drawing.Size(213, 35);
+      this.btnPassword.TabIndex = 12;
+      this.btnPassword.Text = "Contraseña";
+      this.btnPassword.UseVisualStyleBackColor = true;
+      this.btnPassword.Click += new System.EventHandler(this.btnPassword_Click);
       // 
       // panel7
       // 
@@ -385,6 +417,30 @@
       this.pnlContenedor.Size = new System.Drawing.Size(830, 615);
       this.pnlContenedor.TabIndex = 3;
       // 
+      // panel9
+      // 
+      this.panel9.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.panel9.Location = new System.Drawing.Point(0, 578);
+      this.panel9.Name = "panel9";
+      this.panel9.Size = new System.Drawing.Size(10, 35);
+      this.panel9.TabIndex = 13;
+      // 
+      // btnArqueo
+      // 
+      this.btnArqueo.FlatAppearance.BorderSize = 0;
+      this.btnArqueo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
+      this.btnArqueo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnArqueo.Font = new System.Drawing.Font("Berlin Sans FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnArqueo.Image = ((System.Drawing.Image)(resources.GetObject("btnArqueo.Image")));
+      this.btnArqueo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnArqueo.Location = new System.Drawing.Point(4, 578);
+      this.btnArqueo.Name = "btnArqueo";
+      this.btnArqueo.Size = new System.Drawing.Size(213, 35);
+      this.btnArqueo.TabIndex = 14;
+      this.btnArqueo.Text = "Arqueo";
+      this.btnArqueo.UseVisualStyleBackColor = true;
+      this.btnArqueo.Click += new System.EventHandler(this.btnArqueo_Click);
+      // 
       // FormHome
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,5 +493,9 @@
     private System.Windows.Forms.Button btnFormula;
     private System.Windows.Forms.Button btnPedidos;
     private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.Panel panel8;
+    private System.Windows.Forms.Button btnPassword;
+    private System.Windows.Forms.Panel panel9;
+    private System.Windows.Forms.Button btnArqueo;
   }
 }

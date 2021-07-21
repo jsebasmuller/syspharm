@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace SysPharm.Controllers
 {
@@ -64,6 +65,59 @@ namespace SysPharm.Controllers
                        TotalMedicamentos = x.TotalMedicamentos     
                      })
                      .OrderByDescending(x => x.Id).ToList();
+    }
+
+    public IPagedList<FormulaViewModel> GetFormulasPag(int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Formulas.Include(x => x.Medico)
+                              .Include(x => x.Paciente)
+                              .Include(x => x.Servicio)
+                              .Select(x => new FormulaViewModel()
+                              {
+                                Id = x.Id,
+                                FechaDespacho = x.FechaDespacho,
+                                FechaFormula = x.FechaFormula,
+                                IdMedico = x.IdMedico,
+                                NombreMedico = x.Medico.Nombres,
+                                IdPaciente = x.IdPaciente,
+                                NombrePaciente = x.Paciente.Nombres,
+                                Servicio = x.Servicio.Nombre,
+                                TotalCompra = x.TotalCompra,
+                                TotalVenta = x.TotalVenta,
+                                TotalMedicamentos = x.TotalMedicamentos
+                              }).OrderByDescending(x => x.Id).ToPagedList(pageNumber, 13);
+    }
+
+    public IPagedList<FormulaViewModel> BuscadorPag(string txtBuscar, int? pagina)
+    {
+      int pageNumber = pagina ?? 1;
+      return _context.Formulas.Include(x => x.Medico)
+                              .Include(x => x.Paciente)
+                              .Include(x => x.Servicio)
+                              .Select(x => new FormulaViewModel()
+                              {
+                                Id = x.Id,
+                                FechaDespacho = x.FechaDespacho,
+                                FechaFormula = x.FechaFormula,
+                                IdMedico = x.IdMedico,
+                                NombreMedico = x.Medico.Nombres,
+                                IdPaciente = x.IdPaciente,
+                                NombrePaciente = x.Paciente.Nombres,
+                                Servicio = x.Servicio.Nombre,
+                                TotalCompra = x.TotalCompra,
+                                TotalVenta = x.TotalVenta,
+                                TotalMedicamentos = x.TotalMedicamentos
+                              }).Where(x => x.Id.Contains(txtBuscar.Trim()) ||
+                                            x.FechaDespacho.ToString().Contains(txtBuscar.Trim()) ||
+                                            x.FechaFormula.ToString().Contains(txtBuscar.Trim()) ||
+                                            x.IdMedico.Contains(txtBuscar.Trim()) || 
+                                            x.NombreMedico.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.IdPaciente.Contains(txtBuscar.Trim()) ||
+                                            x.NombrePaciente.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.Servicio.Trim().ToLower().Contains(txtBuscar.Trim().ToLower()) ||
+                                            x.TotalCompra.ToString().Trim().Contains(txtBuscar.Trim()) ||
+                                            x.TotalVenta.ToString().Trim().Contains(txtBuscar.Trim())).OrderByDescending(x => x.Id).ToPagedList(pageNumber, 13);
     }
 
     public string GetNextId(DateTime fechaAct)

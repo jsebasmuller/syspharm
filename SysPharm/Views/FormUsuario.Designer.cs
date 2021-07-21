@@ -58,11 +58,17 @@
       this.btnDown = new System.Windows.Forms.Button();
       this.btnLoad = new System.Windows.Forms.Button();
       this.tabListUsers = new System.Windows.Forms.TabPage();
+      this.lblPagPac = new System.Windows.Forms.Label();
+      this.btnNextPac = new System.Windows.Forms.Button();
+      this.btnPrevPac = new System.Windows.Forms.Button();
       this.label10 = new System.Windows.Forms.Label();
       this.txtBuscarPac = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.listUsuarios = new System.Windows.Forms.DataGridView();
       this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.lblPagMed = new System.Windows.Forms.Label();
+      this.btnNextMed = new System.Windows.Forms.Button();
+      this.btnPrevMed = new System.Windows.Forms.Button();
       this.label11 = new System.Windows.Forms.Label();
       this.txtBuscarMed = new System.Windows.Forms.TextBox();
       this.label8 = new System.Windows.Forms.Label();
@@ -156,6 +162,7 @@
       this.cmbEps.Name = "cmbEps";
       this.cmbEps.Size = new System.Drawing.Size(200, 25);
       this.cmbEps.TabIndex = 18;
+      this.cmbEps.SelectedValueChanged += new System.EventHandler(this.ValidarEps);
       // 
       // label9
       // 
@@ -383,6 +390,9 @@
       // 
       // tabListUsers
       // 
+      this.tabListUsers.Controls.Add(this.lblPagPac);
+      this.tabListUsers.Controls.Add(this.btnNextPac);
+      this.tabListUsers.Controls.Add(this.btnPrevPac);
       this.tabListUsers.Controls.Add(this.label10);
       this.tabListUsers.Controls.Add(this.txtBuscarPac);
       this.tabListUsers.Controls.Add(this.label7);
@@ -394,6 +404,40 @@
       this.tabListUsers.TabIndex = 2;
       this.tabListUsers.Text = "Lista de Pacientes";
       this.tabListUsers.UseVisualStyleBackColor = true;
+      // 
+      // lblPagPac
+      // 
+      this.lblPagPac.AutoSize = true;
+      this.lblPagPac.Cursor = System.Windows.Forms.Cursors.HSplit;
+      this.lblPagPac.Location = new System.Drawing.Point(365, 389);
+      this.lblPagPac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblPagPac.Name = "lblPagPac";
+      this.lblPagPac.Size = new System.Drawing.Size(64, 17);
+      this.lblPagPac.TabIndex = 11;
+      this.lblPagPac.Text = "Buscador";
+      // 
+      // btnNextPac
+      // 
+      this.btnNextPac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNextPac.Location = new System.Drawing.Point(474, 386);
+      this.btnNextPac.Name = "btnNextPac";
+      this.btnNextPac.Size = new System.Drawing.Size(25, 23);
+      this.btnNextPac.TabIndex = 13;
+      this.btnNextPac.Text = ">";
+      this.btnNextPac.UseVisualStyleBackColor = true;
+      this.btnNextPac.Click += new System.EventHandler(this.btnNextPac_Click);
+      // 
+      // btnPrevPac
+      // 
+      this.btnPrevPac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPrevPac.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnPrevPac.Location = new System.Drawing.Point(320, 386);
+      this.btnPrevPac.Name = "btnPrevPac";
+      this.btnPrevPac.Size = new System.Drawing.Size(25, 23);
+      this.btnPrevPac.TabIndex = 12;
+      this.btnPrevPac.Text = "<";
+      this.btnPrevPac.UseVisualStyleBackColor = true;
+      this.btnPrevPac.Click += new System.EventHandler(this.btnPrevPac_Click);
       // 
       // label10
       // 
@@ -443,13 +487,16 @@
       this.listUsuarios.GridColor = System.Drawing.SystemColors.ControlLightLight;
       this.listUsuarios.Location = new System.Drawing.Point(3, 54);
       this.listUsuarios.Name = "listUsuarios";
-      this.listUsuarios.Size = new System.Drawing.Size(786, 363);
+      this.listUsuarios.Size = new System.Drawing.Size(786, 326);
       this.listUsuarios.TabIndex = 0;
       this.listUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTablePaciente);
       // 
       // tabPage1
       // 
       this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.tabPage1.Controls.Add(this.lblPagMed);
+      this.tabPage1.Controls.Add(this.btnNextMed);
+      this.tabPage1.Controls.Add(this.btnPrevMed);
       this.tabPage1.Controls.Add(this.label11);
       this.tabPage1.Controls.Add(this.txtBuscarMed);
       this.tabPage1.Controls.Add(this.label8);
@@ -460,6 +507,40 @@
       this.tabPage1.Size = new System.Drawing.Size(792, 420);
       this.tabPage1.TabIndex = 3;
       this.tabPage1.Text = "Lista de Medicos";
+      // 
+      // lblPagMed
+      // 
+      this.lblPagMed.AutoSize = true;
+      this.lblPagMed.Cursor = System.Windows.Forms.Cursors.HSplit;
+      this.lblPagMed.Location = new System.Drawing.Point(365, 389);
+      this.lblPagMed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblPagMed.Name = "lblPagMed";
+      this.lblPagMed.Size = new System.Drawing.Size(64, 17);
+      this.lblPagMed.TabIndex = 14;
+      this.lblPagMed.Text = "Buscador";
+      // 
+      // btnNextMed
+      // 
+      this.btnNextMed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNextMed.Location = new System.Drawing.Point(474, 386);
+      this.btnNextMed.Name = "btnNextMed";
+      this.btnNextMed.Size = new System.Drawing.Size(25, 23);
+      this.btnNextMed.TabIndex = 16;
+      this.btnNextMed.Text = ">";
+      this.btnNextMed.UseVisualStyleBackColor = true;
+      this.btnNextMed.Click += new System.EventHandler(this.btnNextMed_Click);
+      // 
+      // btnPrevMed
+      // 
+      this.btnPrevMed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPrevMed.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnPrevMed.Location = new System.Drawing.Point(320, 386);
+      this.btnPrevMed.Name = "btnPrevMed";
+      this.btnPrevMed.Size = new System.Drawing.Size(25, 23);
+      this.btnPrevMed.TabIndex = 15;
+      this.btnPrevMed.Text = "<";
+      this.btnPrevMed.UseVisualStyleBackColor = true;
+      this.btnPrevMed.Click += new System.EventHandler(this.btnPrevMed_Click);
       // 
       // label11
       // 
@@ -509,7 +590,7 @@
       this.listMedicos.GridColor = System.Drawing.SystemColors.ControlLightLight;
       this.listMedicos.Location = new System.Drawing.Point(3, 54);
       this.listMedicos.Name = "listMedicos";
-      this.listMedicos.Size = new System.Drawing.Size(786, 363);
+      this.listMedicos.Size = new System.Drawing.Size(786, 326);
       this.listMedicos.TabIndex = 1;
       this.listMedicos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTableMedico);
       // 
@@ -628,5 +709,11 @@
     private System.Windows.Forms.Label label10;
     private System.Windows.Forms.Label label11;
     private System.Windows.Forms.TextBox txtBuscarMed;
+    private System.Windows.Forms.Label lblPagPac;
+    private System.Windows.Forms.Button btnNextPac;
+    private System.Windows.Forms.Button btnPrevPac;
+    private System.Windows.Forms.Label lblPagMed;
+    private System.Windows.Forms.Button btnNextMed;
+    private System.Windows.Forms.Button btnPrevMed;
   }
 }

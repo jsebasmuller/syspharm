@@ -29,12 +29,17 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMedicamento));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabListUsers = new System.Windows.Forms.TabPage();
-      this.label11 = new System.Windows.Forms.Label();
-      this.txtBuscar = new System.Windows.Forms.TextBox();
+      this.lblPag = new System.Windows.Forms.Label();
+      this.btnNext = new System.Windows.Forms.Button();
+      this.btnPrev = new System.Windows.Forms.Button();
+      this.panel1 = new System.Windows.Forms.Panel();
       this.label7 = new System.Windows.Forms.Label();
+      this.txtBuscar = new System.Windows.Forms.TextBox();
+      this.label11 = new System.Windows.Forms.Label();
       this.listMedicamentos = new System.Windows.Forms.DataGridView();
       this.tabBulkLoad = new System.Windows.Forms.TabPage();
       this.btnDown = new System.Windows.Forms.Button();
@@ -58,7 +63,16 @@
       this.openFile = new System.Windows.Forms.OpenFileDialog();
       this.saveFile = new System.Windows.Forms.SaveFileDialog();
       this.errVlrV = new System.Windows.Forms.ErrorProvider(this.components);
+      this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.listDetalles = new System.Windows.Forms.DataGridView();
+      this.button1 = new System.Windows.Forms.Button();
+      this.btnAddMedi = new System.Windows.Forms.Button();
+      this.label1 = new System.Windows.Forms.Label();
+      this.cmbMedicamentos = new System.Windows.Forms.ComboBox();
+      this.errMedi = new System.Windows.Forms.ErrorProvider(this.components);
+      this.errMedVen = new System.Windows.Forms.ErrorProvider(this.components);
       this.tabListUsers.SuspendLayout();
+      this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listMedicamentos)).BeginInit();
       this.tabBulkLoad.SuspendLayout();
       this.tabAddMed.SuspendLayout();
@@ -67,13 +81,18 @@
       ((System.ComponentModel.ISupportInitialize)(this.errNom)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errVlrC)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errVlrV)).BeginInit();
+      this.tabPage1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.listDetalles)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errMedi)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errMedVen)).BeginInit();
       this.SuspendLayout();
       // 
       // tabListUsers
       // 
-      this.tabListUsers.Controls.Add(this.label11);
-      this.tabListUsers.Controls.Add(this.txtBuscar);
-      this.tabListUsers.Controls.Add(this.label7);
+      this.tabListUsers.Controls.Add(this.lblPag);
+      this.tabListUsers.Controls.Add(this.btnNext);
+      this.tabListUsers.Controls.Add(this.btnPrev);
+      this.tabListUsers.Controls.Add(this.panel1);
       this.tabListUsers.Controls.Add(this.listMedicamentos);
       this.tabListUsers.Location = new System.Drawing.Point(4, 26);
       this.tabListUsers.Margin = new System.Windows.Forms.Padding(4);
@@ -84,31 +103,58 @@
       this.tabListUsers.Text = "Lista de Medicamentos";
       this.tabListUsers.UseVisualStyleBackColor = true;
       // 
-      // label11
+      // lblPag
       // 
-      this.label11.AutoSize = true;
-      this.label11.Location = new System.Drawing.Point(5, 33);
-      this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(64, 17);
-      this.label11.TabIndex = 7;
-      this.label11.Text = "Buscador";
+      this.lblPag.AutoSize = true;
+      this.lblPag.Cursor = System.Windows.Forms.Cursors.HSplit;
+      this.lblPag.Location = new System.Drawing.Point(365, 389);
+      this.lblPag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblPag.Name = "lblPag";
+      this.lblPag.Size = new System.Drawing.Size(64, 17);
+      this.lblPag.TabIndex = 8;
+      this.lblPag.Text = "Buscador";
       // 
-      // txtBuscar
+      // btnNext
       // 
-      this.txtBuscar.Location = new System.Drawing.Point(109, 31);
-      this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
-      this.txtBuscar.Name = "txtBuscar";
-      this.txtBuscar.Size = new System.Drawing.Size(485, 24);
-      this.txtBuscar.TabIndex = 6;
-      this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+      this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNext.Location = new System.Drawing.Point(474, 386);
+      this.btnNext.Name = "btnNext";
+      this.btnNext.Size = new System.Drawing.Size(25, 23);
+      this.btnNext.TabIndex = 10;
+      this.btnNext.Text = ">";
+      this.btnNext.UseVisualStyleBackColor = true;
+      this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+      // 
+      // btnPrev
+      // 
+      this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnPrev.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnPrev.Location = new System.Drawing.Point(320, 386);
+      this.btnPrev.Name = "btnPrev";
+      this.btnPrev.Size = new System.Drawing.Size(25, 23);
+      this.btnPrev.TabIndex = 9;
+      this.btnPrev.Text = "<";
+      this.btnPrev.UseVisualStyleBackColor = true;
+      this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+      // 
+      // panel1
+      // 
+      this.panel1.Controls.Add(this.label7);
+      this.panel1.Controls.Add(this.txtBuscar);
+      this.panel1.Controls.Add(this.label11);
+      this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panel1.Location = new System.Drawing.Point(4, 4);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(784, 52);
+      this.panel1.TabIndex = 8;
       // 
       // label7
       // 
+      this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.label7.AutoSize = true;
       this.label7.BackColor = System.Drawing.Color.SkyBlue;
-      this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-      this.label7.Location = new System.Drawing.Point(4, 4);
+      this.label7.Location = new System.Drawing.Point(0, 0);
       this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(740, 17);
@@ -116,27 +162,43 @@
       this.label7.Text = "Sí desea modificar o eliminar un medicamento, debes dar doble clic sobre el medic" +
     "amento al que deseas hacer la acción";
       // 
+      // txtBuscar
+      // 
+      this.txtBuscar.Location = new System.Drawing.Point(72, 21);
+      this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
+      this.txtBuscar.Name = "txtBuscar";
+      this.txtBuscar.Size = new System.Drawing.Size(485, 24);
+      this.txtBuscar.TabIndex = 6;
+      this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(0, 26);
+      this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(64, 17);
+      this.label11.TabIndex = 7;
+      this.label11.Text = "Buscador";
+      // 
       // listMedicamentos
       // 
-      this.listMedicamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
       this.listMedicamentos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.listMedicamentos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listMedicamentos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.listMedicamentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.listMedicamentos.EnableHeadersVisualStyles = false;
       this.listMedicamentos.GridColor = System.Drawing.SystemColors.ControlLightLight;
-      this.listMedicamentos.Location = new System.Drawing.Point(4, 71);
+      this.listMedicamentos.Location = new System.Drawing.Point(4, 57);
       this.listMedicamentos.Margin = new System.Windows.Forms.Padding(4);
       this.listMedicamentos.Name = "listMedicamentos";
-      this.listMedicamentos.Size = new System.Drawing.Size(1048, 474);
+      this.listMedicamentos.Size = new System.Drawing.Size(784, 322);
       this.listMedicamentos.TabIndex = 0;
       this.listMedicamentos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTables);
       // 
@@ -158,7 +220,7 @@
       this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
       this.btnDown.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnDown.Location = new System.Drawing.Point(240, 217);
+      this.btnDown.Location = new System.Drawing.Point(89, 157);
       this.btnDown.Margin = new System.Windows.Forms.Padding(4);
       this.btnDown.Name = "btnDown";
       this.btnDown.Size = new System.Drawing.Size(221, 47);
@@ -173,7 +235,7 @@
       this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
       this.btnLoad.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnLoad.Location = new System.Drawing.Point(604, 217);
+      this.btnLoad.Location = new System.Drawing.Point(469, 157);
       this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
       this.btnLoad.Name = "btnLoad";
       this.btnLoad.Size = new System.Drawing.Size(221, 47);
@@ -355,6 +417,7 @@
       this.tabMedicamentos.Controls.Add(this.tabAddMed);
       this.tabMedicamentos.Controls.Add(this.tabBulkLoad);
       this.tabMedicamentos.Controls.Add(this.tabListUsers);
+      this.tabMedicamentos.Controls.Add(this.tabPage1);
       this.tabMedicamentos.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabMedicamentos.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabMedicamentos.Location = new System.Drawing.Point(0, 0);
@@ -386,6 +449,101 @@
       // 
       this.errVlrV.ContainerControl = this;
       // 
+      // tabPage1
+      // 
+      this.tabPage1.Controls.Add(this.listDetalles);
+      this.tabPage1.Controls.Add(this.button1);
+      this.tabPage1.Controls.Add(this.btnAddMedi);
+      this.tabPage1.Controls.Add(this.label1);
+      this.tabPage1.Controls.Add(this.cmbMedicamentos);
+      this.tabPage1.Location = new System.Drawing.Point(4, 26);
+      this.tabPage1.Name = "tabPage1";
+      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage1.Size = new System.Drawing.Size(792, 420);
+      this.tabPage1.TabIndex = 3;
+      this.tabPage1.Text = "Medicamentos Vencidos";
+      this.tabPage1.UseVisualStyleBackColor = true;
+      // 
+      // listDetalles
+      // 
+      this.listDetalles.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.listDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+      this.listDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.listDetalles.EnableHeadersVisualStyles = false;
+      this.listDetalles.Location = new System.Drawing.Point(34, 99);
+      this.listDetalles.Name = "listDetalles";
+      this.listDetalles.Size = new System.Drawing.Size(727, 230);
+      this.listDetalles.TabIndex = 26;
+      this.listDetalles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTable);
+      this.listDetalles.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.listDetalles_CellEndEdit);
+      // 
+      // button1
+      // 
+      this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.button1.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+      this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.button1.Location = new System.Drawing.Point(658, 349);
+      this.button1.Name = "button1";
+      this.button1.Size = new System.Drawing.Size(102, 36);
+      this.button1.TabIndex = 25;
+      this.button1.Text = "Guardar";
+      this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button1.UseVisualStyleBackColor = true;
+      this.button1.Click += new System.EventHandler(this.button1_Click);
+      // 
+      // btnAddMedi
+      // 
+      this.btnAddMedi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnAddMedi.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnAddMedi.Image = ((System.Drawing.Image)(resources.GetObject("btnAddMedi.Image")));
+      this.btnAddMedi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.btnAddMedi.Location = new System.Drawing.Point(658, 56);
+      this.btnAddMedi.Margin = new System.Windows.Forms.Padding(4);
+      this.btnAddMedi.Name = "btnAddMedi";
+      this.btnAddMedi.Size = new System.Drawing.Size(102, 36);
+      this.btnAddMedi.TabIndex = 24;
+      this.btnAddMedi.Text = "Agregar";
+      this.btnAddMedi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnAddMedi.UseVisualStyleBackColor = true;
+      this.btnAddMedi.Click += new System.EventHandler(this.btnAddMedi_Click);
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label1.Location = new System.Drawing.Point(31, 59);
+      this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(93, 17);
+      this.label1.TabIndex = 23;
+      this.label1.Text = "Medicamento";
+      // 
+      // cmbMedicamentos
+      // 
+      this.cmbMedicamentos.FormattingEnabled = true;
+      this.cmbMedicamentos.Location = new System.Drawing.Point(172, 56);
+      this.cmbMedicamentos.Margin = new System.Windows.Forms.Padding(4);
+      this.cmbMedicamentos.Name = "cmbMedicamentos";
+      this.cmbMedicamentos.Size = new System.Drawing.Size(461, 25);
+      this.cmbMedicamentos.TabIndex = 22;
+      this.cmbMedicamentos.SelectedValueChanged += new System.EventHandler(this.validateMedicamento);
+      // 
+      // errMedi
+      // 
+      this.errMedi.ContainerControl = this;
+      // 
+      // errMedVen
+      // 
+      this.errMedVen.ContainerControl = this;
+      // 
       // FormMedicamento
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -400,6 +558,8 @@
       this.Text = "FormMedicamento";
       this.tabListUsers.ResumeLayout(false);
       this.tabListUsers.PerformLayout();
+      this.panel1.ResumeLayout(false);
+      this.panel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.listMedicamentos)).EndInit();
       this.tabBulkLoad.ResumeLayout(false);
       this.tabAddMed.ResumeLayout(false);
@@ -409,6 +569,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.errNom)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errVlrC)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errVlrV)).EndInit();
+      this.tabPage1.ResumeLayout(false);
+      this.tabPage1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.listDetalles)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errMedi)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.errMedVen)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -442,5 +607,17 @@
     private System.Windows.Forms.TextBox txtVlrV;
     private System.Windows.Forms.Label label11;
     private System.Windows.Forms.TextBox txtBuscar;
+    private System.Windows.Forms.Panel panel1;
+    private System.Windows.Forms.Label lblPag;
+    private System.Windows.Forms.Button btnNext;
+    private System.Windows.Forms.Button btnPrev;
+    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.DataGridView listDetalles;
+    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btnAddMedi;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.ComboBox cmbMedicamentos;
+    private System.Windows.Forms.ErrorProvider errMedi;
+    private System.Windows.Forms.ErrorProvider errMedVen;
   }
 }

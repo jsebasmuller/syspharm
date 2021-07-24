@@ -225,6 +225,11 @@ namespace SysPharm.Controllers
     {
       try
       {
+        var exist = _context.InventariosFinMes.Where(x => x.Fecha.Year == DateTime.Now.Year && x.Fecha.Month == DateTime.Now.Month && x.Fecha.Day == DateTime.Now.Day).FirstOrDefault();
+        if(exist != null)
+        {
+          return true;
+        }
         var medicamentos = _context.Medicamentos.Select(x => new InventarioFinMes()
         {
           Cantidad = x.Cantidad,

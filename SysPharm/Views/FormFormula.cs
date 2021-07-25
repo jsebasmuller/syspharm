@@ -238,6 +238,15 @@ namespace SysPharm.Views
       }
       else
       {
+        if(cmbServicio.SelectedValue.ToString() != "SysPharm.Models.Servicio" && (Int32.Parse(cmbServicio.SelectedValue.ToString()) == 1 || Int32.Parse(cmbServicio.SelectedValue.ToString()) == 2))
+        {
+          cmbMedico.SelectedValue = listaMedicos.Where(x => x.Documento.Trim().ToLower() == "otros").Select(x => x.Documento).FirstOrDefault();
+          cmbMedico.Enabled = false;
+        }
+        else
+        {
+          cmbMedico.Enabled = true;
+        }
         valSer = true;
         errServ.SetError(cmbServicio, "");
       }

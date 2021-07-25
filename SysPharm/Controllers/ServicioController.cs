@@ -92,7 +92,7 @@ namespace SysPharm.Controllers
 
     public List<Servicio> GetServicios()
     {
-      return _context.Servicios.ToList();
+      return _context.Servicios.OrderBy(x => x.Id).ToList();
     }
   }
 }

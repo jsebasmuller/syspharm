@@ -144,7 +144,7 @@ namespace SysPharm.Controllers
             worksheet.Range[$"A{row}:C{row}"].Merge();
             worksheet.Range[$"D{row}:E{row}"].Merge();
             worksheet.Range[$"F{row}:G{row}"].Merge();
-            worksheet.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.eps.Nombre;
+            worksheet.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.servicio.Nombre + " " + servicio.servicio.Nombre.Trim().ToLower() == "gastos servicios" || servicio.servicio.Nombre.Trim().ToLower() == "venta al público" ? "" : servicio.eps.Nombre;
             worksheet.Range[$"D{row}"].Number = servicio.g.Count();
             worksheet.Range[$"F{row}"].Number = servicio.g.Sum(x => x.TotalCompra);
             worksheet.Range[$"F{row}"].NumberFormat = "_($* #,##0_)";
@@ -269,7 +269,7 @@ namespace SysPharm.Controllers
           {
             worksheet.Range[$"A{row}:E{row}"].Merge();
             worksheet.Range[$"F{row}:H{row}"].Merge();
-            worksheet.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.eps.Nombre;
+            worksheet.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.servicio.Nombre + " " + servicio.servicio.Nombre.Trim().ToLower() == "gastos servicios" || servicio.servicio.Nombre.Trim().ToLower() == "venta al público" ? "" : servicio.eps.Nombre;
             worksheet.Range[$"F{row}"].Number = servicio.g.Sum(x => x.TotalCompra) / servicio.g.Count();
             worksheet.Range[$"F{row}"].NumberFormat = "_($* #,##0_)";
             if (i == servicios.Count() - 1)
@@ -616,7 +616,7 @@ namespace SysPharm.Controllers
           int fDatosChar8 = 0;
           foreach (var servicio in servicios)
           {
-            worksheetRes.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.eps.Nombre;
+            worksheetRes.Range[$"A{row}"].Text = servicio.servicio.Nombre + " " + servicio.servicio.Nombre.Trim().ToLower() == "gastos servicios" || servicio.servicio.Nombre.Trim().ToLower() == "venta al público" ? "" : servicio.eps.Nombre;
             var mes5 = servicio.g.Where(x => x.FechaDespacho.Year == dMes5.Year && x.FechaDespacho.Month == dMes5.Month).ToList();
             worksheetRes.Range[$"B{row}"].Number = mes5.Count();
             var mes4 = servicio.g.Where(x => x.FechaDespacho.Year == dMes4.Year && x.FechaDespacho.Month == dMes4.Month).ToList();

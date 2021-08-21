@@ -26,10 +26,10 @@ namespace SysPharm.Controllers
     }
 
     public bool Login(string password) {
-      var ingreso = _context.Ingresos.Where(x => x.Password == password && x.IsActive).FirstOrDefault();
-      if (ingreso != null)
+        var ingreso = _context.Ingresos.Where(x => x.Password == password && x.IsActive).FirstOrDefault();
+        if (ingreso != null)
         return true;
-      else
+        else
         return false;
     }
 

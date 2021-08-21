@@ -8,7 +8,7 @@ namespace SysPharm.Models
   public class Context : DbContext
   {
     public Context()
-        : base("syspharm")
+        : base(@"data source=25.78.148.250;initial catalog=syspharm;User ID=sa;Password=Sanpedro2021+;")
     {
     }
 

@@ -27,6 +27,7 @@ namespace SysPharm.Views
     bool valMed = false;
     bool valPro = false;
     bool valDetP = false;
+    bool valNumFact = false;
 
     public FormPedido()
     {
@@ -41,6 +42,9 @@ namespace SysPharm.Views
       dtSolicitud.Format = DateTimePickerFormat.Custom;
       dtSolicitud.CustomFormat = "dd/MM/yyyy";
       lblId.Text = pedControl.GetNextId(DateTime.Now);
+      dateTimePicker1.Format = DateTimePickerFormat.Custom;
+      dateTimePicker1.CustomFormat = "MMMM/yyyy";
+      dateTimePicker1.ShowUpDown = true;
       RefrescarListaPedidos();
       ObtenerMedicamentos();
       RefrescarListaDetalle();
@@ -101,6 +105,7 @@ namespace SysPharm.Views
         Pedido pedido = new Pedido();
         pedido.Id = lblId.Text;
         pedido.Proveedor = txtProveedor.Text;
+        pedido.NumeroFactura = txtNumFact.Text;
         pedido.FechaIngreso = dtIngreso.Value.Date;
         pedido.FechaPedido = dtSolicitud.Value.Date;
         pedido.DetallesPedido = new List<DetallePedido>();
@@ -159,18 +164,20 @@ namespace SysPharm.Views
       valMed = false;
       valPro = false;
       valDetP = false;
+      valNumFact = false;
       listDetalles.Rows.Clear();
     }
 
     private bool ValidarCampos(object sender, EventArgs e)
     {
-      if (valPro && valDetP)
+      if (valPro && valDetP && valNumFact)
       {
         return true;
       }
       else
       {
         validateProovedor(sender, e);
+        validateNumFact(sender, e);
         validateDetallePedido(sender, e);
         return false;
       }
@@ -204,7 +211,21 @@ namespace SysPharm.Views
       }
     }
 
-    private void validateDetallePedido(object sender, EventArgs e)
+    private void validateNumFact(object sender, EventArgs e)
+    {
+        if (txtNumFact.Text == "" || txtNumFact.Text == " ")
+        {
+            valNumFact = false;
+            errNumFact.SetError(txtNumFact, "Número de factura no válido");
+        }
+        else
+        {
+            valNumFact = true;
+            errNumFact.SetError(txtNumFact, "");
+        }
+    }
+
+        private void validateDetallePedido(object sender, EventArgs e)
     {
       bool val = true;
       if (listDetalles.Rows.Count > 1)
@@ -328,6 +349,27 @@ namespace SysPharm.Views
       if (result == System.Windows.Forms.DialogResult.Yes)
       {
         listaDetalle.RemoveAt(e.RowIndex);
+      }
+    }
+
+    private void btnDownInfMon_Click(object sender, EventArgs e)
+    {
+      if (saveFile.ShowDialog() == DialogResult.OK)
+      {
+        var success = pedControl.Report(dateTimePicker1.Value.Date, saveFile.FileName);
+        if (success.Respuesta)
+        {
+          var resp = MessageBox.Show(success.Mensaje, "¡Descarga!",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.None);
+        }
+        else
+        {
+            var resp = MessageBox.Show(success.Mensaje, "Error",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error);
+            pedControl = new PedidoController(new Context());
+        }
       }
     }
   }

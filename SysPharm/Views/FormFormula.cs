@@ -42,6 +42,9 @@ namespace SysPharm.Views
       dtDespacho.CustomFormat = "dd/MM/yyyy";
       lblId.Text = formulaControl.GetNextId(DateTime.Now);
       lblTotal.Text = "$ 0";
+      dateTimePicker1.Format = DateTimePickerFormat.Custom;
+      dateTimePicker1.CustomFormat = "MMMM/yyyy";
+      dateTimePicker1.ShowUpDown = true;
       RefrescarListaFormulas();
       ObtenerMedicamentos();
       ObtenerMedicos();
@@ -453,6 +456,27 @@ namespace SysPharm.Views
       if (result == System.Windows.Forms.DialogResult.Yes)
       {
         listaDetalle.RemoveAt(e.RowIndex);
+      }
+    }
+
+    private void btnDownInfMon_Click(object sender, EventArgs e)
+    {
+      if (saveFile.ShowDialog() == DialogResult.OK)
+      {
+        var success = formulaControl.Report(dateTimePicker1.Value.Date, saveFile.FileName);
+        if (success.Respuesta)
+        {
+          var resp = MessageBox.Show(success.Mensaje, "¡Descarga!",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.None);
+        }
+        else
+        {
+          var resp = MessageBox.Show(success.Mensaje, "Error",
+                                              MessageBoxButtons.OK,
+                                              MessageBoxIcon.Error);
+          formulaControl = new FormulaController(new Context());
+        }
       }
     }
   }

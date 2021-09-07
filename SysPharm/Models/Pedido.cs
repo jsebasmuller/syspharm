@@ -11,6 +11,8 @@ namespace SysPharm.Models
   {
     [Key]
     public string Id { get; set; }
+    [StringLength(10)]
+    public string NumeroFactura { get; set; }
     [StringLength(250)]
     public string Proveedor { get; set; }
     public DateTime FechaPedido { get; set; }

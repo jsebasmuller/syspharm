@@ -29,11 +29,13 @@
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPedido));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPedidos = new System.Windows.Forms.TabControl();
             this.tabAddPedido = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtNumFact = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
             this.listDetalles = new System.Windows.Forms.DataGridView();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -54,33 +56,31 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.listPedidos = new System.Windows.Forms.DataGridView();
-            this.errMedi = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errFecS = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errFecI = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errDet = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtNumFact = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.errNumFact = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnDownInfMon = new System.Windows.Forms.Button();
+            this.errMedi = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errFecS = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errFecI = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errDet = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errNumFact = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.tabPedidos.SuspendLayout();
             this.tabAddPedido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listDetalles)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listPedidos)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errMedi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFecS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFecI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errDet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errNumFact)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPedidos
@@ -124,6 +124,26 @@
             this.tabAddPedido.TabIndex = 0;
             this.tabAddPedido.Text = "Agregar Pedido";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(425, 48);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(112, 17);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Número Factura";
+            // 
+            // txtNumFact
+            // 
+            this.txtNumFact.Location = new System.Drawing.Point(548, 44);
+            this.txtNumFact.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNumFact.Name = "txtNumFact";
+            this.txtNumFact.Size = new System.Drawing.Size(220, 24);
+            this.txtNumFact.TabIndex = 23;
+            this.txtNumFact.Leave += new System.EventHandler(this.validateNumFact);
+            // 
             // lblId
             // 
             this.lblId.AutoSize = true;
@@ -137,20 +157,21 @@
             // listDetalles
             // 
             this.listDetalles.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.listDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.listDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.listDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listDetalles.EnableHeadersVisualStyles = false;
             this.listDetalles.Location = new System.Drawing.Point(41, 156);
             this.listDetalles.Name = "listDetalles";
             this.listDetalles.Size = new System.Drawing.Size(727, 204);
             this.listDetalles.TabIndex = 21;
+            this.listDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listDetalles_CellClick);
             this.listDetalles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.doubleClickTable);
             this.listDetalles.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.listDetalles_CellEndEdit);
             // 
@@ -357,14 +378,14 @@
             // listPedidos
             // 
             this.listPedidos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.listPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.listPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.listPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listPedidos.EnableHeadersVisualStyles = false;
             this.listPedidos.Location = new System.Drawing.Point(8, 42);
@@ -372,50 +393,6 @@
             this.listPedidos.Name = "listPedidos";
             this.listPedidos.Size = new System.Drawing.Size(775, 337);
             this.listPedidos.TabIndex = 0;
-            // 
-            // errMedi
-            // 
-            this.errMedi.ContainerControl = this;
-            // 
-            // errPro
-            // 
-            this.errPro.ContainerControl = this;
-            // 
-            // errFecS
-            // 
-            this.errFecS.ContainerControl = this;
-            // 
-            // errFecI
-            // 
-            this.errFecI.ContainerControl = this;
-            // 
-            // errDet
-            // 
-            this.errDet.ContainerControl = this;
-            // 
-            // txtNumFact
-            // 
-            this.txtNumFact.Location = new System.Drawing.Point(548, 44);
-            this.txtNumFact.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNumFact.Name = "txtNumFact";
-            this.txtNumFact.Size = new System.Drawing.Size(220, 24);
-            this.txtNumFact.TabIndex = 23;
-            this.txtNumFact.Leave += new System.EventHandler(this.validateNumFact);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(425, 48);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 17);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Número Factura";
-            // 
-            // errNumFact
-            // 
-            this.errNumFact.ContainerControl = this;
             // 
             // tabPage1
             // 
@@ -471,6 +448,30 @@
             this.btnDownInfMon.UseVisualStyleBackColor = true;
             this.btnDownInfMon.Click += new System.EventHandler(this.btnDownInfMon_Click);
             // 
+            // errMedi
+            // 
+            this.errMedi.ContainerControl = this;
+            // 
+            // errPro
+            // 
+            this.errPro.ContainerControl = this;
+            // 
+            // errFecS
+            // 
+            this.errFecS.ContainerControl = this;
+            // 
+            // errFecI
+            // 
+            this.errFecI.ContainerControl = this;
+            // 
+            // errDet
+            // 
+            this.errDet.ContainerControl = this;
+            // 
+            // errNumFact
+            // 
+            this.errNumFact.ContainerControl = this;
+            // 
             // saveFile
             // 
             this.saveFile.FileName = "InformePedidos.xlsx";
@@ -495,15 +496,15 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listPedidos)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errMedi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFecS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFecI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errDet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errNumFact)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
     }

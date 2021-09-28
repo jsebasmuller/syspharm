@@ -316,7 +316,7 @@ namespace SysPharm.Views
       if(listDetalles[0, e.RowIndex].Value != null && listDetalles[2, e.RowIndex].Value != null)
       {
         var medicamento = medControl.GetMedicamento(listDetalles[0, e.RowIndex].Value.ToString());
-        if(medicamento.Cantidad <= Int32.Parse(listDetalles[2, e.RowIndex].Value.ToString()))
+        if(medicamento.Cantidad < Int32.Parse(listDetalles[2, e.RowIndex].Value.ToString()))
         {
           listDetalles[2, e.RowIndex].Value = 0;
           string message = "No hay suficientes medicamentos en inventario";

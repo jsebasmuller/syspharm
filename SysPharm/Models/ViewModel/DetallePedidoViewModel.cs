@@ -15,5 +15,8 @@ namespace SysPharm.Models.ViewModel
     public int Cantidad { get; set; }
     public double VlrCompra { get; set; }
     public double VlrVenta { get; set; }
+    public DateTime FechaVencimiento { get; set; }
+    public string ConcPrincipioActivo { get; set; }
+    public string ClasificacionRiesgo { get; set; }
   }
 }

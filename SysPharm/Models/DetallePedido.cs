@@ -25,6 +25,11 @@ namespace SysPharm.Models
     public int Cantidad { get; set; }
     public double VlrCompra { get; set; }
     public double VlrVenta { get; set; }
+    public DateTime FechaVencimiento { get; set; }
+    [StringLength(10)]
+    public string ConcentracionPrincipioActivo { get; set; }
+    [StringLength(5)]
+    public string ClasificacionRiesgo { get; set; }
 
     #region Propiedades de navegación
     public Medicamento Medicamento { get; set; }
